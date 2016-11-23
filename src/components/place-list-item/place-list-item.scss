@@ -1,0 +1,25 @@
+.place-list {
+
+  ion-item {
+    background-color: $background-white;
+
+    ion-col {
+     padding: 0px 0px 0px 0px; 
+    } 
+
+    ion-badge {
+      display: initial !important;
+      font-size: 16px !important;
+    }
+
+    ion-button{
+      font-size: 13PX;
+      font-weight: bolder;
+    }
+  }
+}
+
+.rate-button{
+      font-size: 13PX;
+      font-weight: bolder;
+    }

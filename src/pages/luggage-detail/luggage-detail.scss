@@ -1,0 +1,91 @@
+.place-detail {
+
+  ion-item {
+    background-color: $background-white;
+
+  }
+
+  ion-scroll {
+    white-space: nowrap;
+    height: 50px;
+    background-color : $background-white;
+  }
+
+   .button-md {
+    text-transform: none;
+  }
+
+  ion-datetime {
+    color : $fire-brick-color;
+  }
+}
+
+.picker-md .picker-wrapper{
+    background: $background-white;
+  }
+
+.picker-md .picker-toolbar {
+    background: $background-white;
+}
+
+.picker-md .picker-button{
+  color : $toolbar-background;
+}
+
+.picker-md .picker-opt-selected{
+  color : $toolbar-background;
+}
+
+.secondary-title{
+  font-size: 14px;
+  color: $subtitle-color;
+}
+
+.button-inner {
+  flex-flow: column;
+}
+
+.rate-block {
+    border-width: 0px 1px 0px 1px;
+    border-color: $secondary-color;
+    color: black;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+.rate-block-active {
+    color: white;
+    border-color: $secondary-color;
+    background-color: $secondary-color;
+}
+
+.rate-md-block {
+     height: 5.6rem;
+     border-radius: 0px;
+}
+
+.rate-msg{
+  @extend .secondary-title;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.place-name {
+  font-size: 22px;
+}
+
+.address {
+  @extend .secondary-title;
+  margin-top: 4px;
+  font-size: 18px;
+}
+
+.rate-title{
+  padding-bottom: 5px;
+}
+
+.ten-px-margin{
+  margin-top: 10px;
+}
+
+
+

@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      <strong *ngIf="place">{{ place.name }}</strong>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="place-detail">
+  <div *ngIf="place">
+
+    <div>
+      <!--<a class="arrow arrow-left" role="button" (click)="goToPreviousPokemon()"></a>-->
+      <img
+           src="{{ place.img }}"
+           alt="{{ place.name }}">
+      <!--<a class="arrow arrow-right" role="button" (click)="goToNextPokemon()"></a>-->
+    </div>
+
+    <place-detail-brief [place]="place"></place-detail-brief>
+
+    <place-detail-facilities [place]="place"></place-detail-facilities>
+
+    <place-luggage-form [place]="place" [dateLabel]="'Check-in Date'"></place-luggage-form>
+<!--
+    <pokemon-detail-evolution [pokemon]="pokemon"></pokemon-detail-evolution>
+
+    <pokemon-detail-sprites [pokemon]="pokemon"></pokemon-detail-sprites>
+
+    <pokemon-detail-moves [pokemon]="pokemon"></pokemon-detail-moves>-->
+  </div>
+</ion-content>

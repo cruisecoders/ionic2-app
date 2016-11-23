@@ -1,0 +1,32 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>
+            <img src="assets/images/pokeball.png" alt="" style="width: 18px;height: 18px;vertical-align: middle;" />
+            <strong>Luggage Booking</strong>
+        </ion-title>
+    </ion-navbar>
+
+    <ion-toolbar no-border-top>
+        <ion-searchbar color="primary" [(ngModel)]="autocomplete.query" [showCancelButton]="true" (ionInput)="updateSearch()" (ionCancel)="dismiss()"></ion-searchbar>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="place-list">
+    <ion-list [hidden]="!showList">
+        <ion-item *ngFor="let item of autocompleteItems" tappable (click)="chooseItem(item)">
+            {{ item.description }}
+        </ion-item>
+    </ion-list>
+
+    <!--<loader *ngIf="!placeList.length" text="Loading Places..."></loader>-->
+
+    <div *ngIf="placeList.length">
+        <ion-list>
+            <place-list-item *ngFor="let place of placeList" [place]="place" (clicked)=goToPlaceDetail($event)>
+            </place-list-item>
+        </ion-list>
+    </div>
+</ion-content>

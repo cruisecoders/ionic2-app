@@ -1,0 +1,12 @@
+<div (click)="goToPlaceDetail()">
+  <img class="f-image" src="{{place.img}}" />
+
+  <ion-item>
+    <ion-row>
+      <ion-col width-75 text-left>{{place.name}}</ion-col>
+      <ion-col width-25 text-left>
+        <button class="rate-button" ion-button color="secondary" small>{{place.rate | currency:'INR':true:'1.0-0'}}</button>
+      </ion-col>
+    </ion-row>
+  </ion-item>
+</div>
