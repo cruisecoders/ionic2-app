@@ -1,10 +1,14 @@
-import { Component, ViewChild } from '@angular/core';
+import { Storage } from '@ionic/storage';
+import { AuthService } from '../providers/auth-service';
+import { LuggageBooking } from '../pages/luggage-booking/luggage-booking';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from 'ionic-native';
-import { LuggageBooking } from '../pages/luggage-booking/luggage-booking';
+import { AuthForm } from '../pages/auth-form/auth-form';
+import { tokenNotExpired } from 'angular2-jwt';
 
 @Component({
-   template: `
+  template: `
   <ion-menu [content]="content">
     <ion-header>
       <ion-toolbar>
@@ -17,23 +21,28 @@ import { LuggageBooking } from '../pages/luggage-booking/luggage-booking';
         <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
           {{p.title}}
         </button>
+        <button menuClose ion-item (click)="logout()">
+          Logout
+        </button>
       </ion-list>
     </ion-content>
 
   </ion-menu>
-
-    <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+  
+  <ion-nav [root]="rootpage" #content swipeBackEnabled="false"></ion-nav>
   `
 })
-export class MyApp {
-  
+export class MyApp implements OnInit {
+
   @ViewChild(Nav) nav: Nav;
-
-  rootPage: any = LuggageBooking;
-
+  rootpage: any = AuthForm;
   pages: Array<{ title: string, component: any }>;
 
-  constructor(platform: Platform) {
+  storage: Storage;
+
+  constructor(platform: Platform, private authService: AuthService) {
+    this.storage = new Storage();
+
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -41,15 +50,33 @@ export class MyApp {
     });
 
     this.pages = [
-      { title: 'Luggage Booking', component: LuggageBooking },
-      //{ title: 'Freshen Up Booking', component: TypeList },
-      //{ title: 'About', component: AboutPage }
+      { title: 'Luggage Booking', component: LuggageBooking }
     ];
+  }
+
+  ngOnInit() {
+    let isAuth;
+    this.storage.get('id_token').then(data => {
+      isAuth = tokenNotExpired("id_token", data);
+      this.getRootPage(isAuth);
+    });
+  }
+
+  getRootPage(isAuth): any {
+    if (isAuth) {
+      this.rootpage = LuggageBooking;
+    } else {
+      this.rootpage = AuthForm;
+    }
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.nav.setRoot(AuthForm);
   }
 
   openPage(page) {
     this.nav.setRoot(page.component);
-    //this.nav.push(page.component); //temporary - ios bug
   }
 
 }

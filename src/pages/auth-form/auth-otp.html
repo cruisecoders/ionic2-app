@@ -1,0 +1,20 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            <img src="assets/images/pokeball.png" alt="" style="width: 18px;height: 18px;vertical-align: middle;" />
+            <strong>Bag2Bag</strong>
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="auth-form">
+    <div>
+
+        <ion-item class="top-margin">
+            <ion-label floating>OTP</ion-label>
+            <ion-input type="text" [(ngModel)]="user.otp"></ion-input>
+        </ion-item>
+        <button class="top-margin" ion-button full (click)="submitOTP(user)">Submit OTP</button>
+
+    </div>
+</ion-content>

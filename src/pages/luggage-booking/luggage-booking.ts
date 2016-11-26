@@ -1,3 +1,4 @@
+import { CoreService } from '../../providers/core-service';
 import { Component, OnInit, NgZone } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { LuggageDetail } from '../luggage-detail/luggage-detail';
@@ -9,7 +10,7 @@ declare var google: any;
   templateUrl: 'luggage-booking.html'
 })
 export class LuggageBooking implements OnInit {
-  
+
   public showList: boolean = true;
 
   public autocompleteItems: any[] = [];
@@ -24,11 +25,12 @@ export class LuggageBooking implements OnInit {
 
   constructor(
     private navCtrl: NavController,
-    private zone: NgZone
+    private zone: NgZone,
+    private coreService: CoreService
   ) { }
 
   ngOnInit() {
-
+    
   }
 
   chooseItem(item: any) {
@@ -42,7 +44,7 @@ export class LuggageBooking implements OnInit {
 
     this.placeList = [
       {
-        id : 1,
+        id: 1,
         name: "Bag2Bag Hotel yogiraj",
         tagLine1: "Enjoy darshan with yogiraj",
         tagLine2: "1 Km from Saibaba mandir",
@@ -51,7 +53,7 @@ export class LuggageBooking implements OnInit {
         address: "xyz sjh jsdhj jshdj aiji"
       },
       {
-        id : 2,
+        id: 2,
         name: "Bag2Bag Hotel Sun and Shine",
         tagLine1: "Enjoy darshan with Sun and Shine",
         tagLine2: "1 Km from Saibaba mandir",
@@ -60,7 +62,7 @@ export class LuggageBooking implements OnInit {
         address: "xyz sjh jsdhj jshdj aiji"
       },
       {
-        id : 3,
+        id: 3,
         name: "Bag2Bag Hotel Sai Palace",
         tagLine1: "Enjoy darshan with Sai Palace",
         tagLine2: "1 Km from Saibaba mandir",
@@ -69,7 +71,7 @@ export class LuggageBooking implements OnInit {
         address: "xyz sjh jsdhj jshdj aiji"
       },
       {
-        id : 4,
+        id: 4,
         name: "Bag2Bag Hotel Saish",
         tagLine1: "Enjoy darshan with Saish",
         tagLine2: "1 Km from Saibaba mandir",
@@ -78,7 +80,7 @@ export class LuggageBooking implements OnInit {
         address: "xyz sjh jsdhj jshdj aiji"
       },
       {
-        id : 5,
+        id: 5,
         name: "Bag2Bag Hotel Disha",
         tagLine1: "Enjoy darshan with Disha",
         tagLine2: "1 Km from Saibaba mandir",
@@ -126,5 +128,4 @@ export class LuggageBooking implements OnInit {
       place: event.place
     });
   }
-
 }

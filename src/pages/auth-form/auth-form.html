@@ -1,0 +1,110 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            <img src="assets/images/pokeball.png" alt="" style="width: 18px;height: 18px;vertical-align: middle;" />
+            <strong>Bag2Bag</strong>
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="auth-form">
+    <div padding class="top-margin">
+        <ion-segment [(ngModel)]="switch">
+            <ion-segment-button class="segment-button-size" value="login">
+                Login
+            </ion-segment-button>
+            <ion-segment-button class="segment-button-size" value="signup">
+                Sign up
+            </ion-segment-button>
+        </ion-segment>
+    </div>
+    <div [ngSwitch]="switch">
+        <ion-list *ngSwitchCase="'login'" class="top-margin">
+            <form  (ngSubmit)="login(user)" #loginform="ngForm" novalidate>
+                <ion-item>
+                    <ion-label floating>Mobile No.</ion-label>
+                    <ion-input 
+                    name ="number"
+                    type="text" 
+                    [(ngModel)]="user.number"
+                    ngControl="number"
+                    required
+                    pattern="[0-9]+"
+                    #number="ngModel"
+                    minlength="10"
+                    maxlength="10"
+                    >
+                    </ion-input>
+                </ion-item>
+
+                 <div text-right class="error-msg" [hidden]="number.valid || number.pristine" *ngIf="number.touched">
+                    Please enter valid Mobile Number (10 digits).
+                </div>
+                <button [disabled]="!loginform.valid" type="submit" class="top-margin" ion-button full>
+                    Log in
+                </button>
+            </form>
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'signup'" class="top-margin">
+            <form  (ngSubmit)="signup(user)" #signupForm="ngForm" novalidate>
+                <ion-item>
+                    <ion-label floating>First Name</ion-label>
+                    <ion-input type="text" [(ngModel)]="user.firstName" name="firstName"
+                    required minlength="2" maxlength="30" pattern="[a-zA-Z ]*"
+                    #firstName="ngModel"
+                    >
+                    </ion-input>
+                </ion-item>
+
+                <div text-right class="error-msg" [hidden]="firstName.valid || firstName.pristine" *ngIf="firstName.touched">
+                    Please enter your first name (2-30 characters).
+                </div>
+
+                <ion-item>
+                    <ion-label floating>Last Name</ion-label>
+                    <ion-input type="text" [(ngModel)]="user.lastName" name="lastName"
+                    required minlength="2" maxlength="30" pattern="[a-zA-Z ]*"
+                    #lastName="ngModel"
+                    >
+                    </ion-input>
+                </ion-item>
+
+                <div text-right class="error-msg" [hidden]="lastName.valid || lastName.pristine" *ngIf="lastName.touched">
+                    Please enter your last name (2-30 characters).
+                </div>
+
+                 <ion-item>
+                    <ion-label floating>Email Id</ion-label>
+                    <ion-input type="text" [(ngModel)]="user.emailId" name="emailId"
+                    required minlength="4" maxlength="50" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$"
+                    #emailId="ngModel"
+                    >
+                    </ion-input>
+                </ion-item>
+
+                <div text-right class="error-msg" [hidden]="emailId.valid || emailId.pristine" *ngIf="emailId.touched">
+                    Please enter your email id.
+                </div>
+
+                <ion-item>
+                    <ion-label floating>Phone No.</ion-label>
+                    <ion-input type="text" [(ngModel)]="user.number" name="number"
+                    required
+                    pattern="[0-9]+"
+                    #number="ngModel"
+                    minlength="10"
+                    maxlength="10"
+                    >
+                    </ion-input>
+                </ion-item>
+
+                <div text-right class="error-msg" [hidden]="number.valid || number.pristine" *ngIf="number.touched">
+                    Please enter valid mobile number (1-10 digits).
+                </div>
+
+                <button [disabled]="!signupForm.valid" class="top-margin" ion-button full>Sign up</button>
+            </form>
+        </ion-list>
+    </div>
+</ion-content>

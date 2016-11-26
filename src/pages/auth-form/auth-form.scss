@@ -1,0 +1,33 @@
+.auth-form {
+
+  background-color: $background-white;
+
+  ion-item {
+    background-color: $background-white;
+
+  }
+
+   .button-md {
+    text-transform: none;
+    height: 35px;
+    font-size: 17px;
+    font-weight: bold;
+  }
+}
+
+.segment-button-size{
+  font-size: 14px !important;
+}
+
+.top-margin{
+  margin-top: 10%;
+}
+
+.error-msg{
+  margin-top: 2%;
+  color:red;
+}
+
+
+
+
