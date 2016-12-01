@@ -7,7 +7,7 @@
 
   ion-scroll {
     white-space: nowrap;
-    height: 50px;
+    height: 100px;
     background-color : $background-white;
   }
 
@@ -75,8 +75,7 @@
 
 .address {
   @extend .secondary-title;
-  margin-top: 4px;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .rate-title{
@@ -85,6 +84,16 @@
 
 .ten-px-margin{
   margin-top: 10px;
+}
+
+.icon-size{
+  width: 50px;
+  height: 50px;
+}
+
+.facility-text{
+  white-space: normal;
+
 }
 
 

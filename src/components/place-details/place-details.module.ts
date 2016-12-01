@@ -1,3 +1,4 @@
+import { SharedModule } from '../../shared/shared.module';
 import { NgModule }      from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from 'ionic-angular';
@@ -14,6 +15,7 @@ const placeDetails = [
 @NgModule({
   imports: [
     CommonModule,
+    SharedModule,
     IonicModule
   ],
   declarations: [

@@ -1,8 +1,11 @@
-<ion-item>
+<ion-item text-wrap>
   <ion-scroll scrollX="true">
     <ion-row>
-      <ion-col width-25 *ngFor="let facility of facilities">
-        <ion-icon name="{{facility}}"></ion-icon>
+      <ion-col width-25 *ngFor="let facility of place.facilities">
+        <span>
+          <img class="icon-size" src="assets/images/icons/{{facility}}.png" alt="{{facility}}"/>
+          <p class="facility-text">{{facility | facilityPipe}}</p>
+        </span>
       </ion-col>
     </ion-row>
   </ion-scroll>

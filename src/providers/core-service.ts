@@ -11,7 +11,7 @@ export class CoreService {
 
     private api: string;
 
-    constructor( @Inject(APP_CONFIG) config: AppConfig, private http: Http) {
+    constructor( @Inject(APP_CONFIG) config: AppConfig, private http: Http, private authHttp : AuthHttp) {
         this.api = config.apiEndpoint;
     }
 
@@ -23,6 +23,12 @@ export class CoreService {
 
     public postResource(url: string, data): Observable<any> {
         return this.http.post(this.api + url, data, {})
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    public getSecuredResource(url: string, params: URLSearchParams): Observable<any> {
+        return this.authHttp.get(this.api + url, { search: params })
             .map(this.extractData)
             .catch(this.handleError);
     }

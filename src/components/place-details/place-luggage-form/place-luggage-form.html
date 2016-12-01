@@ -8,17 +8,17 @@
 
   <ion-item>
     <ion-row>
-      <span class="rate-msg">Guest ki maa ki choot</span>
+      <span class="rate-msg">Guest to take freshen up</span>
     </ion-row>
     <ion-row>
       <button class="rate-block rate-md-block" ion-button block outline (click)="onSelect(i,rate)" [ngClass]="{'rate-block-active': selectedRate == rate}"
-        *ngFor="let rate of rateList; let i = index;">
-        <div class="rate-title">{{rate.title}}</div>
-        <div>{{rate.price | currency:'INR':true:'1.0-0'}}</div>
+        *ngFor="let rate of place.rates; let i = index;">
+        <div class="rate-title">{{rate.type | rateTitlePipe}}</div>
+        <div>{{rate.rate | currency:'INR':true:'1.0-0'}}</div>
       </button>
     </ion-row>
     <ion-row>
-      <span class="rate-msg">Laude 1 room bacha hai bas</span>
+      <span class="rate-msg" color="dark">{{placeLeftMsg}}</span>
     </ion-row>
   </ion-item>
 
@@ -28,7 +28,7 @@
         Guest name
       </ion-col>
       <ion-col width-67 text-right>
-        <span color="dark">{{user.name}} <ion-icon name="edit"></ion-icon></span>
+        <span ion-text color="dark">{{user.firstName}} <ion-icon name="edit"></ion-icon></span>
       </ion-col>
     </ion-row>
   </ion-item>
@@ -39,26 +39,24 @@
         Amount Payable
       </ion-col>
       <ion-col width-67 text-right>
-        {{totalAmount | currency:'INR':true:'1.0-0'}}
+        {{selectedRate.rate | currency:'INR':true:'1.0-0'}}
       </ion-col>
     </ion-row>
   </ion-item>
 
-  <ion-item class="ten-px-margin">
+  <ion-item class="ten-px-margin" text-wrap>
     <ion-row>
-        Important Points
+      Important Points
     </ion-row>
     <ul class="secondary-title">
-      <li>Only Indian Nationals allow</li>
-      <li>Married people not allowed</li>
-      <li>Only BF and GF allowed</li>
+      <li *ngFor="let msg of place.importantMsgs">{{msg}}</li>
     </ul>
   </ion-item>
 
- <ion-item>
-   <!--<ion-row>Test</ion-row>-->
-   <ion-row>
-     <button ion-button full color="secondary">Confirm Booking</button>
-   </ion-row>
- </ion-item>
+  <ion-item>
+    <!--<ion-row>Test</ion-row>-->
+    <ion-row>
+      <button ion-button full color="secondary">Confirm Booking</button>
+    </ion-row>
+  </ion-item>
 </div>

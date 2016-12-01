@@ -14,9 +14,7 @@
 
     <div>
       <!--<a class="arrow arrow-left" role="button" (click)="goToPreviousPokemon()"></a>-->
-      <img
-           src="{{ place.img }}"
-           alt="{{ place.name }}">
+      <img src="{{ imgPath }}{{ place.frontImg }}" alt="{{ place.name }}">
       <!--<a class="arrow arrow-right" role="button" (click)="goToNextPokemon()"></a>-->
     </div>
 
@@ -24,8 +22,8 @@
 
     <place-detail-facilities [place]="place"></place-detail-facilities>
 
-    <place-luggage-form [place]="place" [dateLabel]="'Check-in Date'"></place-luggage-form>
-<!--
+    <place-luggage-form [place]="place" [dateLabel]="'Check-in Date'" [user]="user"></place-luggage-form>
+    <!--
     <pokemon-detail-evolution [pokemon]="pokemon"></pokemon-detail-evolution>
 
     <pokemon-detail-sprites [pokemon]="pokemon"></pokemon-detail-sprites>

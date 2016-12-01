@@ -10,6 +10,10 @@ import { PagesModule, APP_PAGES } from '../pages/pages.module';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { Storage } from '@ionic/storage';
 
+enum PlaceType {
+  LUGGAGE, FRESHENUP
+}
+
 let storage = new Storage();
 
 export function getAuthHttp(http) {

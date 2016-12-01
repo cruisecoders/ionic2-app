@@ -1,3 +1,4 @@
+import { LuggageService } from '../providers/luggage-service';
 import { CoreService } from '../providers/core-service';
 import { SharedModule } from '../shared/shared.module';
 import { AuthOTP } from './auth-form/auth-otp';
@@ -36,6 +37,6 @@ export const APP_PAGES = [
   exports: [
     APP_PAGES
   ],
-  providers: [CoreService]
+  providers: [CoreService, LuggageService]
 })
 export class PagesModule { }

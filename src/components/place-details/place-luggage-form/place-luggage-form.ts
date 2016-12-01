@@ -1,27 +1,26 @@
-import { Component, Input } from '@angular/core';
+import { User } from '../../../pages/auth-form/user';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'place-luggage-form',
   templateUrl: 'place-luggage-form.html'
 })
-export class PlaceLuggageForm {
-  
+export class PlaceLuggageForm implements OnInit {
+
   @Input() place: any;
   @Input() dateLabel: String;
-  
+  @Input() user: User;
+
   currentDate: Date = new Date();
   startDate: String = this.currentDate.toISOString();
   selDate: String = this.currentDate.toISOString();
   endDate: String = this.getDate();
-  selectedRate: any;
-  rateList : any[] = [];
-  user : {name : String} = {
-    name : 'Gaurav'
-  }
-  totalAmount:number = 1234;
+  selectedRate: any = new Object();
 
-  constructor(){
-     this.getRateList();
+  guestMsg: string = "";
+  placeLeftMsg: string = "";
+
+  constructor() {
   }
 
   getDate(): String {
@@ -30,33 +29,15 @@ export class PlaceLuggageForm {
     return d.toISOString();
   }
 
-  getRateList(){
-    console.log("ratelist");
-    this.rateList = [
-      {
-        title : "Guest 1",
-        price : 100
-      },
-       {
-        title : "Guest 2",
-        price : 150
-      },
-       {
-        title : "Guest 3",
-        price : 200
-      },
-       {
-        title : "Guest 4",
-        price : 250
-      },
-    ]
-
-    //return rateList;
-  }
-
-  onSelect(i, rate){
+  onSelect(i, rate) {
     this.selectedRate = rate;
-    console.log(this.selectedRate);
   }
+
+  ngOnInit() {
+    this.selectedRate = this.place.rates[0];
+    this.guestMsg = "Guest to take freshen up";
+    this.placeLeftMsg = "Only " + this.place.reservedRooms + " rooms left";
+  }
+
 
 }

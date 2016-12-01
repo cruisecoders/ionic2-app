@@ -1,3 +1,4 @@
+import { FacilityPipe } from '../../../pipes/facilityPipe';
 import { Component, Input, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
@@ -8,19 +9,13 @@ import { NavController } from 'ionic-angular';
 export class PlaceDetailFacilities implements OnInit {
 
   @Input() place: any;
-  public facilities : any [] = [];
 
   constructor(
     private navCtrl: NavController
   ) { }
 
-  getPlaceFacilities() {
-    this.facilities = ['heart', 'heart', 'heart', 'heart', 
-    'heart', 'heart', 'heart', 'heart', 'heart'];
+  ngOnInit() {
+
   }
 
-  ngOnInit() {
-    this.getPlaceFacilities();
-  }
-  
 }

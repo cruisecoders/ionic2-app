@@ -17,7 +17,7 @@
 <ion-content class="place-list">
     <ion-list [hidden]="!showList">
         <ion-item *ngFor="let item of autocompleteItems" tappable (click)="chooseItem(item)">
-            {{ item.description }}
+            {{ item.name }}
         </ion-item>
     </ion-list>
 
@@ -25,7 +25,9 @@
 
     <div *ngIf="placeList.length">
         <ion-list>
-            <place-list-item *ngFor="let place of placeList" [place]="place" (clicked)=goToPlaceDetail($event)>
+            <place-list-item
+             *ngFor="let place of placeList" [place]="place"
+             (clicked)=goToPlaceDetail($event)>
             </place-list-item>
         </ion-list>
     </div>

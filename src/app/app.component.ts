@@ -64,6 +64,7 @@ export class MyApp implements OnInit {
 
   getRootPage(isAuth): any {
     if (isAuth) {
+      this.authService.setUserProfile();
       this.rootpage = LuggageBooking;
     } else {
       this.rootpage = AuthForm;

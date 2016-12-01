@@ -1,5 +1,4 @@
 import { CoreService } from './core-service';
-import { APP_CONFIG, AppConfig } from '../app/app-config';
 import { User } from '../pages/auth-form/user';
 import { Inject, Injectable } from '@angular/core';
 import { Http, URLSearchParams } from '@angular/http';
@@ -17,12 +16,18 @@ export class AuthService {
     api: string;
     storage: Storage = new Storage();
 
-    constructor(private http: Http, @Inject(APP_CONFIG) config: AppConfig, private coreService: CoreService) {
-        this.api = config.apiEndpoint;
+    constructor(private coreService: CoreService) {
+    }
+
+    public setUserProfile() {
+        this.storage.get('userInfo').then(data => {
+            this.userProfile = data;
+            return this.userProfile;
+        });
     }
 
     public loaduserProfile(): User {
-        return this.userProfile;
+        return this.userProfile
     }
 
     public login(user: User): Observable<User> {
