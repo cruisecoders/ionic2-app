@@ -47,14 +47,14 @@ export class AuthService {
     }
 
     public logout(): void {
-        this.storage.remove('id_token');
+        this.storage.remove('jwt');
         this.storage.remove('userInfo');
         this.userProfile = null;
         this.authtoken = null;
     }
 
     public storeToken(token: string): void {
-        this.storage.set("id_token", token);
+        this.storage.set("jwt", token);
         this.authtoken = token;
     }
 
@@ -72,11 +72,11 @@ export class AuthService {
 
     //TODO incomplete method
     public isAuthorized(): any {
-        let isAuth = tokenNotExpired('id_token', this.authtoken);
+        let isAuth = tokenNotExpired('jwt', this.authtoken);
         console.log("is auth " + isAuth);
-        // this.storage.get('id_token').then(
+        // this.storage.get('jwt').then(
         //     data =>{
-        //     isAuth = tokenNotExpired("id_token", data);
+        //     isAuth = tokenNotExpired("jwt", data);
         //     console.log(isAuth);
         // });
         // console.log(isAuth);

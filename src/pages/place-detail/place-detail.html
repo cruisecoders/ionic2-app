@@ -1,8 +1,5 @@
 <ion-header>
   <ion-navbar>
-    <!--<button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>-->
     <ion-title>
       <strong *ngIf="place">{{ place.name }}</strong>
     </ion-title>
@@ -20,14 +17,11 @@
 
     <place-detail-brief [place]="place"></place-detail-brief>
 
-    <place-detail-facilities [place]="place"></place-detail-facilities>
+    <place-detail-facilities *ngIf="place.facilities.length > 0" [place]="place"></place-detail-facilities>
 
-    <place-luggage-form [place]="place" [dateLabel]="'Check-in Date'" [user]="user"></place-luggage-form>
-    <!--
-    <pokemon-detail-evolution [pokemon]="pokemon"></pokemon-detail-evolution>
+    <place-luggage-form [place]="place" [dateLabel]="dateLabel" [user]="user" [guestMsg]="guestMsg" [roomLeftMsg]="roomLeftMsg"
+      (clicked)="confirmBooking($event)">
+    </place-luggage-form>
 
-    <pokemon-detail-sprites [pokemon]="pokemon"></pokemon-detail-sprites>
-
-    <pokemon-detail-moves [pokemon]="pokemon"></pokemon-detail-moves>-->
   </div>
 </ion-content>

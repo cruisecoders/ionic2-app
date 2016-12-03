@@ -1,0 +1,41 @@
+.booking-list {
+
+  ion-item {
+    background-color: $background-white;
+  }
+
+  .button-md {
+    text-transform: none;
+  }
+
+  .five-px-margin{
+    margin-top: 5px;
+  }
+
+  .place-name-title{
+    font-size: 16px;
+  }
+
+  .date-val{
+    font-size: 16px;
+    color: $fire-brick-color;
+  }
+
+  .date-title{
+    font-size: 12px;
+    color: $subtitle-color;
+  }
+
+  .card-background-color{
+    background: $background-white;
+  }
+
+  .card-ion-item{
+    padding-left: 0px !important;
+  }
+
+}
+
+
+
+

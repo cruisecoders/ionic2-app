@@ -1,3 +1,4 @@
+import { LoadingController } from 'ionic-angular';
 import { Component, Input } from '@angular/core';
 
 @Component({
@@ -6,5 +7,18 @@ import { Component, Input } from '@angular/core';
 })
 export class Loader {
 
-  @Input() text: string;
+  public loading: any = this.loadingCtrl.create({
+    content: 'Please wait...'
+  });
+
+  constructor(public loadingCtrl: LoadingController) { }
+
+  public showLoader() {
+    this.loading.present();
+  }
+
+  public closeLoader() {
+    this.loading.dismiss();
+  }
+
 }

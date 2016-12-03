@@ -1,3 +1,4 @@
+import { Console } from '@angular/compiler/src/private_import_core';
 import { CoreService } from '../providers/core-service';
 import { API_CONFIG, APP_CONFIG } from './app-config';
 import { AuthService } from '../providers/auth-service';
@@ -18,10 +19,10 @@ let storage = new Storage();
 
 export function getAuthHttp(http) {
     return new AuthHttp(new AuthConfig({
-        //noJwtError: true,
-        //globalHeaders: [{'Accept': 'application/json'}],
-        //tokenName: 'myToken',
-        tokenGetter: (() => storage.get('id_token'))
+        noJwtError: true,
+        globalHeaders: [{'Accept': 'application/json'}],
+        tokenName: 'jwt',
+        tokenGetter: (() => storage.get('jwt'))
     }), http);
 }
 

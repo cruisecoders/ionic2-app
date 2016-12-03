@@ -1,5 +1,5 @@
 import { User } from '../../../pages/auth-form/user';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'place-luggage-form',
@@ -10,6 +10,9 @@ export class PlaceLuggageForm implements OnInit {
   @Input() place: any;
   @Input() dateLabel: String;
   @Input() user: User;
+  @Input() guestMsg: string;
+  @Input() roomLeftMsg: string;
+  @Output() clicked: EventEmitter<any> = new EventEmitter();
 
   currentDate: Date = new Date();
   startDate: String = this.currentDate.toISOString();
@@ -17,10 +20,11 @@ export class PlaceLuggageForm implements OnInit {
   endDate: String = this.getDate();
   selectedRate: any = new Object();
 
-  guestMsg: string = "";
-  placeLeftMsg: string = "";
-
   constructor() {
+  }
+
+  ngOnInit() {
+    this.selectedRate = this.place.rates[0];
   }
 
   getDate(): String {
@@ -29,15 +33,16 @@ export class PlaceLuggageForm implements OnInit {
     return d.toISOString();
   }
 
+  goToPlaceDetail() {
+    this.clicked.emit({ place: this.place });
+  }
+
   onSelect(i, rate) {
     this.selectedRate = rate;
   }
 
-  ngOnInit() {
-    this.selectedRate = this.place.rates[0];
-    this.guestMsg = "Guest to take freshen up";
-    this.placeLeftMsg = "Only " + this.place.reservedRooms + " rooms left";
+  confirmBooking() {
+    this.clicked.emit({ rate: this.selectedRate, date: this.selDate });
   }
-
 
 }

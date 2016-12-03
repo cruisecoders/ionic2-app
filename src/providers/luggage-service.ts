@@ -11,7 +11,7 @@ export class LuggageService {
     }
 
     public getCityByTag(tag: string): Observable<any> {
-        return this.coreService.getResource('getCitiesByTag', this.getURLSearchParams("tag", tag));
+        return this.coreService.getSecuredResource('getCitiesByTag', this.getURLSearchParams("tag", tag));
     }
 
     public getPlacesByCityAndPlaceType(city: any, placeType: string): Observable<any> {
@@ -24,5 +24,19 @@ export class LuggageService {
         let params = new URLSearchParams();
         params.set(key, value);
         return params;
+    }
+
+    public getBookingsByUserId(id: number): Observable<any> {
+        let params = new URLSearchParams();
+        return this.coreService.getSecuredResource('getBookings/' + id, params);
+    }
+
+
+    public submitBooking(booking: any): Observable<any> {
+        return this.coreService.postSecuredResource('submitBooking', booking);
+    }
+
+    public cancelBooking(booking: any): Observable<any> {
+        return this.coreService.postSecuredResource('cancelBooking/' + booking.id, {});
     }
 }

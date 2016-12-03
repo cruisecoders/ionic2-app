@@ -1,0 +1,33 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>
+            <img src="assets/images/pokeball.png" alt="" style="width: 18px;height: 18px;vertical-align: middle;" />
+            <strong>{{title}}</strong>
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="booking-list">
+
+    <div *ngIf="bookingList.length">
+
+
+        <ion-card class="five-px-margin card-background-color" *ngFor="let booking of bookingList" (click)="goToBookingDetail(booking)">
+            <img src="{{ imgPath }}{{ booking.place.frontImg }}" alt="{{ booking.place.name }}">
+            <ion-card-content>
+                <ion-card-title class="place-name-title">
+                    {{booking.place.name}}
+                </ion-card-title>
+                <ion-item class="card-ion-item">
+                    <span item-left class="date-title">Date:</span>
+                    <span item-left class="date-val">{{ booking.bookingStatus.activityDate | date:'MMM, d' }}</span>
+                    <span item-right class="date-title">Status:</span>
+                    <span item-right class="date-val">{{ booking.bookingStatus.activity | bookingStatusPipe}}</span>
+                </ion-item>
+            </ion-card-content>
+        </ion-card>
+    </div>
+</ion-content>

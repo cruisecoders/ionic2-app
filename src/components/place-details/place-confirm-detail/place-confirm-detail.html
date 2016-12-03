@@ -1,0 +1,59 @@
+<div>
+  <ion-item text-wrap text-center *ngIf="booking.bookingStatus.activity != cancelActivity">
+    <div>
+      <ion-icon class="thumps-up-icon" ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
+    </div>
+    <div class="booking-successful">Booking Successful</div>
+    <div class="booking-id">Booking ID : {{booking.id}}</div>
+  </ion-item>
+
+  <ion-item text-wrap text-center *ngIf="booking.bookingStatus.activity == cancelActivity">
+    <div>
+      <ion-icon class="thumps-up-icon-cancel" ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
+    </div>
+    <div class="booking-cancel">Booking Cancelled</div>
+    <div class="booking-id-cancel">Booking ID : {{booking.id}}</div>
+  </ion-item>
+
+  <ion-item class="ten-px-margin" text-wrap>
+    <div class="place-name-confirm"> {{booking.place.name}}</div>
+    <div class="address">
+      {{booking.place.address}}
+    </div>
+    <ion-row class="place-detail-row-height">
+      <ion-col text-left width-33><span class="detail-heading">Primary Guest</span>
+        <br>
+        <div class="detail-title">{{user.firstName}}</div>
+      </ion-col>
+      <ion-col text-center width-33><span class="detail-heading">Guest</span>
+        <br>
+        <div class="detail-title">{{booking.payment.rateType | guestTitlePipe}}</div>
+      </ion-col>
+      <ion-col text-right width-33><span class="detail-heading">Check in</span>
+        <br>
+        <div class="detail-title">{{booking.bookingStatus.activityDate | date:'MMM, d'}}</div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="place-detail-row-height-2">
+      <ion-col text-left width-33><span class="detail-heading">Status</span>
+        <br>
+        <div class="detail-title">{{ booking.bookingStatus.activity | bookingStatusPipe}}</div>
+      </ion-col>
+      <ion-col text-center width-33><span class="detail-heading">To be paid</span>
+        <br>
+        <div class="detail-title">{{booking.payment.payAmount | currency:'INR':true:'1.0-0'}}</div>
+      </ion-col>
+    </ion-row>
+
+  </ion-item>
+
+  <ion-item>
+    <ion-row *ngIf="booking.bookingStatus.activity != cancelActivity">
+      <button ion-button full color="secondary" (click)="cancelBooking()">Cancel Booking</button>
+    </ion-row>
+    <ion-row *ngIf="booking.bookingStatus.activity == cancelActivity">
+      <button ion-button full color="secondary" (click)="backToPlaces()">Back to bookings</button>
+    </ion-row>
+  </ion-item>
+
+</div>

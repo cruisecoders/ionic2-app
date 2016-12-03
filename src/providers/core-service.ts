@@ -33,6 +33,12 @@ export class CoreService {
             .catch(this.handleError);
     }
 
+    public postSecuredResource(url: string, data): Observable<any> {
+        return this.authHttp.post(this.api + url, data, {})
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
     private extractData(res: Response) {
         let body = res.json();
         return body.data || {};

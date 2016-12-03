@@ -1,7 +1,9 @@
+import { BookingHistory } from '../pages/booking-history/booking-history';
+import { APP_CONFIG, AppConfig } from './app-config';
 import { Storage } from '@ionic/storage';
 import { AuthService } from '../providers/auth-service';
-import { LuggageBooking } from '../pages/luggage-booking/luggage-booking';
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { PlaceBooking } from '../pages/place-booking/place-booking';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from 'ionic-native';
 import { AuthForm } from '../pages/auth-form/auth-form';
@@ -36,11 +38,13 @@ export class MyApp implements OnInit {
 
   @ViewChild(Nav) nav: Nav;
   rootpage: any = AuthForm;
-  pages: Array<{ title: string, component: any }>;
+  pages: Array<{ title: string, component: any, rootParam: string }>;
 
   storage: Storage;
 
-  constructor(platform: Platform, private authService: AuthService) {
+  constructor(platform: Platform,
+    private authService: AuthService,
+    @Inject(APP_CONFIG) private apiConfig: AppConfig) {
     this.storage = new Storage();
 
     platform.ready().then(() => {
@@ -50,14 +54,16 @@ export class MyApp implements OnInit {
     });
 
     this.pages = [
-      { title: 'Luggage Booking', component: LuggageBooking }
+      { title: 'Freshen up Booking', component: PlaceBooking, rootParam: this.apiConfig.FRESHENUP },
+      { title: 'Luggage Booking', component: PlaceBooking, rootParam: this.apiConfig.LUGGAGE },
+      { title: 'Booking Histoy', component: BookingHistory, rootParam: "" }
     ];
   }
 
   ngOnInit() {
     let isAuth;
-    this.storage.get('id_token').then(data => {
-      isAuth = tokenNotExpired("id_token", data);
+    this.storage.get('jwt').then(data => {
+      isAuth = tokenNotExpired("jwt", data);
       this.getRootPage(isAuth);
     });
   }
@@ -65,7 +71,10 @@ export class MyApp implements OnInit {
   getRootPage(isAuth): any {
     if (isAuth) {
       this.authService.setUserProfile();
-      this.rootpage = LuggageBooking;
+      this.nav.setRoot(PlaceBooking, {
+        config: this.apiConfig.FRESHENUP,
+        title: 'Freshen up Booking'
+      });
     } else {
       this.rootpage = AuthForm;
     }
@@ -77,7 +86,10 @@ export class MyApp implements OnInit {
   }
 
   openPage(page) {
-    this.nav.setRoot(page.component);
+    this.nav.setRoot(page.component, {
+      config: page.rootParam,
+      title: page.title
+    });
   }
 
 }

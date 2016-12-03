@@ -1,5 +1,5 @@
 import { AuthOTP } from './auth-otp';
-import { AlertController, NavController } from 'ionic-angular';
+import { AlertController, LoadingController, NavController } from 'ionic-angular';
 import { User } from './user';
 import { AuthService } from '../../providers/auth-service';
 import { Component } from '@angular/core';
@@ -15,15 +15,19 @@ export class AuthForm {
     switch: string = 'login';
     user: User = new User();
     errorMessage: any;
+    public loading: any;
 
     constructor(private authService: AuthService,
         private navCtrl: NavController,
+        public loadingCtrl: LoadingController,
         private alertController: AlertController) { }
 
     login(user: User): void {
+        this.showLoader();
         this.authService.login(user)
             .subscribe(
             user => {
+                this.dismissLoader();
                 if (user.numberExist) {
                     this.goToOTP(user);
                 } else {
@@ -31,13 +35,20 @@ export class AuthForm {
                     this.switch = "signup";
                 }
             },
-            error => this.errorMessage = <any>error);
+            error => {
+                this.errorMessage = <any>error;
+                this.dismissLoader();
+            }
+
+            );
     }
 
     signup(user: User): void {
+        this.showLoader();
         this.authService.signup(user)
             .subscribe(
             user => {
+                this.dismissLoader();
                 if (user.numberExist) {
                     this.showAlert("Ooops", "Number is already registered. Please Login");
                     this.switch = "login";
@@ -45,7 +56,10 @@ export class AuthForm {
                     this.goToOTP(this.user);
                 }
             },
-            error => this.errorMessage = <any>error);
+            error => {
+            this.errorMessage = <any>error
+                this.dismissLoader();
+            });
     }
 
     showAlert(title: string, subtitle: string): void {
@@ -61,6 +75,17 @@ export class AuthForm {
         this.navCtrl.push(AuthOTP, {
             user: user
         });
+    }
+
+    private showLoader() {
+        this.loading = this.loadingCtrl.create({
+            content: 'Please wait...'
+        });
+        this.loading.present();
+    }
+
+    private dismissLoader() {
+        this.loading.dismiss();
     }
 
 }
