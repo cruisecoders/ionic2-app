@@ -5,6 +5,8 @@
   <author email="gauravgarg@wedealnow.com" href="http://bag2bag.in/">Bag2Bag Team</author>
   <content src="index.html"/>
   <access origin="*"/>
+  <access launch-external="yes" origin="tel:*" />
+  <access launch-external="yes" origin="mailto:*" />
   <allow-intent href="http://*/*"/>
   <allow-intent href="https://*/*"/>
   <allow-intent href="tel:*"/>

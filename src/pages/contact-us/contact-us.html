@@ -1,0 +1,70 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>
+            <img src="assets/images/logo.png" alt="" style="width: 22px;height: 22px;vertical-align: middle;" />
+            <strong>{{title}}</strong>
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="contact-us">
+
+    <ion-item class="ion-item-heading">
+        <ion-row class="ion-row-heading">
+            <ion-col width-50>
+                <div class="headline-name">Bag2Bag</div>
+            </ion-col>
+        </ion-row>
+        <ion-row class="ion-row-heading">
+            <div class="headline-what-it-does">Just Freshen-up and Get Offloaded</div>
+        </ion-row>
+    </ion-item>
+
+    <ion-card *ngFor="let contact of ContactList" >
+
+        <a ion-item text-wrap class="contact-us-phone" href="tel:+91-{{contact.phone}}">
+            <ion-row>
+                <ion-col width-10>
+                    <ion-icon class="phone-icon" name="call" md="md-call"></ion-icon>
+                </ion-col>
+                <ion-col class="phone-icon-text-margin">
+                    <span><strong>Call Us: We're available 24 hours.</strong></span>
+                    <br>
+                    <div>{{contact.phone}}</div>
+                </ion-col>
+            </ion-row>
+        </a>
+
+        <a ion-item text-wrap class="contact-us-phone" href="mailto:{{contact.emailId}}">
+            <ion-row>
+                <ion-col width-10>
+                    <ion-icon class="phone-icon" name="mail" md="md-mail"></ion-icon>
+                </ion-col>
+                <ion-col class="phone-icon-text-margin">
+                    <span><strong>Mail Us: We're available 24 hours.</strong></span>
+                    <br>
+                    <div>{{contact.emailId}}</div>
+                </ion-col>
+            </ion-row>
+        </a>
+
+        <ion-item text-wrap class="contact-us-phone">
+            <ion-row>
+                <ion-col width-10>
+                    <ion-icon class="phone-icon" ios="ios-home" md="md-home"></ion-icon>
+                </ion-col>
+                <ion-col class="phone-icon-text-margin" width-75>
+                    <span><strong>Address:</strong></span>
+                    <br>
+                    <div>{{contact.address}}</div>
+                </ion-col>
+            </ion-row>
+        </ion-item>
+
+    </ion-card>
+
+
+</ion-content>

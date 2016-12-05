@@ -1,3 +1,4 @@
+import { ContactUs } from './contact-us/contact-us';
 import { BookingHistory } from './booking-history/booking-history';
 import { PlaceConfirm } from './place-confirm/place-confirm';
 import { LuggageService } from '../providers/luggage-service';
@@ -19,7 +20,8 @@ export const APP_PAGES = [
   PlaceConfirm,
   BookingHistory,
   AuthForm,
-  AuthOTP
+  AuthOTP,
+  ContactUs
 ];
 
 @NgModule({
@@ -32,6 +34,7 @@ export const APP_PAGES = [
     IonicModule.forRoot(PlaceDetail),
     IonicModule.forRoot(PlaceConfirm),
     IonicModule.forRoot(BookingHistory),
+    IonicModule.forRoot(ContactUs)
   ],
   declarations: [
     APP_PAGES,

@@ -72,7 +72,6 @@ export class PlaceBooking implements OnInit {
   }
 
   getPlacesByCityAndPlaceType(city: any, placeType: string): void {
-    console.log(city);
     this.showLoader();
     this.luggageService.getPlacesByCityAndPlaceType(city, placeType).subscribe(
       data => {

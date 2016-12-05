@@ -31,6 +31,11 @@ export class LuggageService {
         return this.coreService.getSecuredResource('getBookings/' + id, params);
     }
 
+    public getContactUs(): Observable<any> {
+        let params = new URLSearchParams();
+        return this.coreService.getSecuredResource('getContactUs', params);
+    }
+
 
     public submitBooking(booking: any): Observable<any> {
         return this.coreService.postSecuredResource('submitBooking', booking);

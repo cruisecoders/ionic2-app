@@ -1,59 +1,39 @@
-import { PlaceConfirm } from '../place-confirm/place-confirm';
-import { User } from '../auth-form/user';
-import { AuthService } from '../../providers/auth-service';
-import { APP_CONFIG, AppConfig } from '../../app/app-config';
 import { LuggageService } from '../../providers/luggage-service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { AlertController, LoadingController, NavController, NavParams } from 'ionic-angular';
 
 @Component({
-  selector: 'booking-history',
-  templateUrl: 'booking-history.html'
+  selector: 'contact-us',
+  templateUrl: 'contact-us.html'
 })
 
-export class BookingHistory implements OnInit {
+export class ContactUs implements OnInit {
 
   public showList: boolean = true;
   public title: string;
-  public bookingList: any[] = [];
   errorMessage: any;
   public loading: any;
-  public user: User;
-  public imgPath: string;
+  public ContactList: any[] = [];
 
   constructor(
     private navParams: NavParams,
     private navCtrl: NavController,
     private luggageService: LuggageService,
     public loadingCtrl: LoadingController,
-    public authService: AuthService,
     private alertController: AlertController,
-    @Inject(APP_CONFIG) private config: AppConfig
   ) {
-    this.imgPath = config.apiImgEndPoint;
   }
 
   ngOnInit() {
-    this.loadUserProfile();
     this.title = this.navParams.data.title;
+    this.getContactUs();
   }
 
-  ionViewWillEnter() {
-    this.getBookingsByUserId(this.user.id);
-  }
-
-  loadUserProfile(): void {
-    this.user = this.authService.loaduserProfile();
-  }
-
-  chooseItem(item: any): void {
-  }
-
-  getBookingsByUserId(id): void {
+  getContactUs(): void {
     this.showLoader();
-    this.luggageService.getBookingsByUserId(id).subscribe(
+    this.luggageService.getContactUs().subscribe(
       data => {
-        this.bookingList = data;
+        this.ContactList = data;
         this.dismissLoader();
       },
       error => {
@@ -62,15 +42,6 @@ export class BookingHistory implements OnInit {
         this.dismissLoader();
       }
     )
-  }
-
-  goToBookingDetail(booking): void {
-    this.showLoader();
-    this.navCtrl.push(PlaceConfirm, {
-      booking: booking,
-      title: "Booking : " + booking.id
-    });
-    this.dismissLoader();
   }
 
   private errorHandler() {

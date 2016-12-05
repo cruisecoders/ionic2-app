@@ -1,3 +1,4 @@
+import { ContactUs } from '../pages/contact-us/contact-us';
 import { BookingHistory } from '../pages/booking-history/booking-history';
 import { APP_CONFIG, AppConfig } from './app-config';
 import { Storage } from '@ionic/storage';
@@ -65,7 +66,8 @@ export class MyApp implements OnInit {
     this.pages = [
       { title: 'Freshen up Booking', component: PlaceBooking, rootParam: this.apiConfig.FRESHENUP },
       { title: 'Luggage Booking', component: PlaceBooking, rootParam: this.apiConfig.LUGGAGE },
-      { title: 'Booking Histoy', component: BookingHistory, rootParam: "" }
+      { title: 'Booking Histoy', component: BookingHistory, rootParam: "" },
+      { title: 'Contact Us', component: ContactUs, rootParam: "" }
     ];
   }
 
