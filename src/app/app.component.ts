@@ -32,13 +32,17 @@ import { Splashscreen } from 'ionic-native';
 
   </ion-menu>
   
-  <ion-nav [root]="rootpage" #content swipeBackEnabled="false"></ion-nav>
+  <ion-nav [root]="rootpage" [rootParams]="rootPageParams" #content swipeBackEnabled="false"></ion-nav>
   `
 })
 export class MyApp implements OnInit {
 
   @ViewChild(Nav) nav: Nav;
-  rootpage: any = AuthForm;
+  rootpage: any = PlaceBooking;
+  rootPageParams: any = {
+    config: this.apiConfig.FRESHENUP,
+    title: 'Freshen up Booking'
+  }
   pages: Array<{ title: string, component: any, rootParam: string }>;
 
   storage: Storage;
@@ -74,14 +78,14 @@ export class MyApp implements OnInit {
   }
 
   getRootPage(isAuth): any {
-    if (isAuth) {
+    if (!isAuth) {
+      this.nav.setRoot(AuthForm);
+    } else {
       this.authService.setUserProfile();
-      this.nav.setRoot(PlaceBooking, {
+      /*this.nav.setRoot(PlaceBooking, {
         config: this.apiConfig.FRESHENUP,
         title: 'Freshen up Booking'
-      });
-    } else {
-      this.rootpage = AuthForm;
+      });*/
     }
   }
 
