@@ -9,9 +9,7 @@
     text-transform: none;
   }
 
-}
-
-.thumps-up-icon{
+  .thumps-up-icon{
   color: green;
   font-size: 2.2em;
 }
@@ -41,47 +39,22 @@
   color: $fire-brick-color;
 }
 
-.secondary-title{
-  font-size: 14px;
-  color: $subtitle-color;
-}
-
 .button-inner {
   flex-flow: column;
-}
-
-.rate-msg{
-  @extend .secondary-title;
-  margin-top: 10px;
-  margin-bottom: 10px;
 }
 
 .place-name-confirm {
   font-size: 16px;
 }
 
-.address {
-  @extend .secondary-title;
+.place-name-address {
   font-size: 12px !important;
   margin-top: 7px;
-}
-
-.rate-title{
-  padding-bottom: 5px;
+  color: $subtitle-color;
 }
 
 .ten-px-margin{
   margin-top: 10px;
-}
-
-.icon-size{
-  width: 50px;
-  height: 50px;
-}
-
-.facility-text{
-  white-space: normal;
-
 }
 
 .place-detail-row-height{
@@ -101,6 +74,10 @@
   margin-top: 7px;
   color: $fire-brick-color;
 }
+
+}
+
+
 
 
 

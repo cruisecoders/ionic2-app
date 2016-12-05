@@ -1,4 +1,3 @@
-import { Console } from '@angular/compiler/src/private_import_core';
 import { CoreService } from '../providers/core-service';
 import { API_CONFIG, APP_CONFIG } from './app-config';
 import { AuthService } from '../providers/auth-service';

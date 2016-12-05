@@ -4,8 +4,7 @@ import { AuthService } from '../../providers/auth-service';
 import { APP_CONFIG, AppConfig } from '../../app/app-config';
 import { LuggageService } from '../../providers/luggage-service';
 import { Component, Inject, OnInit } from '@angular/core';
-import { LoadingController, NavController, NavParams } from 'ionic-angular';
-import { PlaceDetail } from '../place-detail/place-detail';
+import { AlertController, LoadingController, NavController, NavParams } from 'ionic-angular';
 
 @Component({
   selector: 'booking-history',
@@ -17,7 +16,7 @@ export class BookingHistory implements OnInit {
   public showList: boolean = true;
   public title: string;
   public bookingList: any[] = [];
-  public errorMessage: string = '';
+  errorMessage: any;
   public loading: any;
   public user: User;
   public imgPath: string;
@@ -28,7 +27,8 @@ export class BookingHistory implements OnInit {
     private luggageService: LuggageService,
     public loadingCtrl: LoadingController,
     public authService: AuthService,
-    @Inject(APP_CONFIG) private config: AppConfig,
+    private alertController: AlertController,
+    @Inject(APP_CONFIG) private config: AppConfig
   ) {
     this.imgPath = config.apiImgEndPoint;
   }
@@ -55,16 +55,36 @@ export class BookingHistory implements OnInit {
         this.bookingList = data;
       },
       error => {
-        error => this.errorMessage = <any>error;
+        this.errorMessage = <any>error;
+        this.errorHandler();
       }
     )
   }
 
   goToBookingDetail(booking): void {
+    this.showLoader();
     this.navCtrl.push(PlaceConfirm, {
       booking: booking,
       title: "Booking : " + booking.id
     });
+    this.dismissLoader();
+  }
+
+  private errorHandler() {
+    if (this.errorMessage.data != undefined) {
+      this.showAlert("Ooops", this.errorMessage.data);
+    } else {
+      this.showAlert("Ooops", "Something Wrong. Please try again.");
+    }
+  }
+
+  showAlert(title: string, subtitle: string): void {
+    let alert = this.alertController.create({
+      title: title,
+      subTitle: subtitle,
+      buttons: ['OK']
+    });
+    alert.present();
   }
 
   private showLoader() {

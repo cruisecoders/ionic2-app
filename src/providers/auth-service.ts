@@ -1,7 +1,7 @@
 import { CoreService } from './core-service';
 import { User } from '../pages/auth-form/user';
-import { Inject, Injectable } from '@angular/core';
-import { Http, URLSearchParams } from '@angular/http';
+import { Injectable } from '@angular/core';
+import { URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';

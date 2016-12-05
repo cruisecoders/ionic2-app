@@ -4,13 +4,15 @@
             <ion-icon name="menu"></ion-icon>
         </button>
         <ion-title>
-            <img src="assets/images/pokeball.png" alt="" style="width: 18px;height: 18px;vertical-align: middle;" />
+            <img src="assets/images/logo.png" alt="" style="width: 22px;height: 22px;vertical-align: middle;" />
             <strong>{{title}}</strong>
         </ion-title>
     </ion-navbar>
 
     <ion-toolbar no-border-top>
-        <ion-searchbar color="primary" [(ngModel)]="autocomplete.query" [showCancelButton]="true" (ionInput)="updateSearch()" (ionCancel)="dismiss()"></ion-searchbar>
+        <ion-searchbar color="primary" [(ngModel)]="autocomplete.name" 
+        [showCancelButton]="true" (ionInput)="updateSearch()" 
+        (ionCancel)="dismiss()" placeholder="Enter city : Shirdi"></ion-searchbar>
     </ion-toolbar>
 </ion-header>
 
@@ -20,8 +22,6 @@
             {{ item.name }}
         </ion-item>
     </ion-list>
-
-    <!--<loader *ngIf="!placeList.length" text="Loading Places..."></loader>-->
 
     <div *ngIf="placeList.length">
         <ion-list>

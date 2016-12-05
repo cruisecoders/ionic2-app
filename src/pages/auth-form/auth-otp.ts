@@ -2,7 +2,7 @@ import { APP_CONFIG, AppConfig } from '../../app/app-config';
 import { User } from './user';
 import { AuthService } from '../../providers/auth-service';
 import { Component, Inject, OnInit } from '@angular/core';
-import { LoadingController, NavController, NavParams } from 'ionic-angular';
+import { AlertController, LoadingController, NavController, NavParams } from 'ionic-angular';
 import { PlaceBooking } from '../place-booking/place-booking';
 
 @Component({
@@ -20,7 +20,8 @@ export class AuthOTP implements OnInit {
         private navParams: NavParams,
         private navCtrl: NavController,
         public loadingCtrl: LoadingController,
-        @Inject(APP_CONFIG) private config: AppConfig) { }
+        @Inject(APP_CONFIG) private config: AppConfig,
+        private alertController: AlertController) { }
 
     submitOTP(user: User): void {
         this.showLoader();
@@ -35,8 +36,9 @@ export class AuthOTP implements OnInit {
                 });
                 this.dismissLoader();
             },
-            error => error => {
+            error => {
                 this.errorMessage = <any>error;
+                this.errorHandler();
                 this.dismissLoader();
             });
     }
@@ -48,14 +50,32 @@ export class AuthOTP implements OnInit {
             data => {
                 this.dismissLoader();
             },
-            error => error => {
+            error => {
                 this.errorMessage = <any>error;
+                this.errorHandler();
                 this.dismissLoader();
             });
     }
 
     ngOnInit() {
         this.user = this.navParams.data.user;
+    }
+
+    showAlert(title: string, subtitle: string): void {
+        let alert = this.alertController.create({
+            title: title,
+            subTitle: subtitle,
+            buttons: ['OK']
+        });
+        alert.present();
+    }
+
+    private errorHandler() {
+        if (this.errorMessage.data != undefined) {
+            this.showAlert("Ooops", this.errorMessage.data);
+        } else {
+            this.showAlert("Ooops", "Something Wrong. Please try again.");
+        }
     }
 
     private showLoader() {

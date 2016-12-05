@@ -1,5 +1,5 @@
 <div>
-  <ion-item text-wrap text-center *ngIf="booking.bookingStatus.activity != cancelActivity">
+  <ion-item text-wrap text-center *ngIf="booking.activity != cancelActivity">
     <div>
       <ion-icon class="thumps-up-icon" ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
     </div>
@@ -7,7 +7,7 @@
     <div class="booking-id">Booking ID : {{booking.id}}</div>
   </ion-item>
 
-  <ion-item text-wrap text-center *ngIf="booking.bookingStatus.activity == cancelActivity">
+  <ion-item text-wrap text-center *ngIf="booking.activity == cancelActivity">
     <div>
       <ion-icon class="thumps-up-icon-cancel" ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
     </div>
@@ -17,7 +17,7 @@
 
   <ion-item class="ten-px-margin" text-wrap>
     <div class="place-name-confirm"> {{booking.place.name}}</div>
-    <div class="address">
+    <div class="place-name-address">
       {{booking.place.address}}
     </div>
     <ion-row class="place-detail-row-height">
@@ -31,13 +31,13 @@
       </ion-col>
       <ion-col text-right width-33><span class="detail-heading">Drop On</span>
         <br>
-        <div class="detail-title">{{booking.bookingStatus.activityDate | date:'MMM, d'}}</div>
+        <div class="detail-title">{{booking.checkinDate | date:'MMM, d'}}</div>
       </ion-col>
     </ion-row>
     <ion-row class="place-detail-row-height-2">
       <ion-col text-left width-33><span class="detail-heading">Status</span>
         <br>
-        <div class="detail-title">{{ booking.bookingStatus.activity | bookingStatusPipe}}</div>
+        <div class="detail-title">{{ booking.activity | bookingStatusPipe}}</div>
       </ion-col>
       <ion-col text-center width-33><span class="detail-heading">To be paid</span>
         <br>
@@ -48,10 +48,10 @@
   </ion-item>
 
   <ion-item>
-    <ion-row *ngIf="booking.bookingStatus.activity != cancelActivity">
+    <ion-row *ngIf="booking.activity != cancelActivity">
       <button ion-button full color="secondary" (click)="cancelBooking()">Cancel Booking</button>
     </ion-row>
-    <ion-row *ngIf="booking.bookingStatus.activity == cancelActivity">
+    <ion-row *ngIf="booking.activity == cancelActivity">
       <button ion-button full color="secondary" (click)="backToPlaces()">Back to bookings</button>
     </ion-row>
   </ion-item>

@@ -1,4 +1,3 @@
-import { FacilityPipe } from '../../../pipes/facilityPipe';
 import { Component, Input, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 

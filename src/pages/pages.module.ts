@@ -8,8 +8,6 @@ import { NgModule } from '@angular/core';
 import { IonicModule } from 'ionic-angular';
 import { PlaceBooking } from '../pages/place-booking/place-booking';
 import { AuthForm } from '../pages/auth-form/auth-form';
-
-import { Loader } from '../components/loader/loader';
 import { PlaceListItem } from '../components/place-list-item/place-list-item';
 import { PlaceDetail } from '../pages/place-detail/place-detail';
 
@@ -37,7 +35,6 @@ export const APP_PAGES = [
   ],
   declarations: [
     APP_PAGES,
-    Loader,
     PlaceListItem
   ],
   exports: [

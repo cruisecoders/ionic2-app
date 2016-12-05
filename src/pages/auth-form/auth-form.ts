@@ -3,6 +3,7 @@ import { AlertController, LoadingController, NavController } from 'ionic-angular
 import { User } from './user';
 import { AuthService } from '../../providers/auth-service';
 import { Component } from '@angular/core';
+import 'rxjs/add/operator/catch';
 
 
 @Component({
@@ -37,6 +38,7 @@ export class AuthForm {
             },
             error => {
                 this.errorMessage = <any>error;
+                this.errorHandler();
                 this.dismissLoader();
             }
 
@@ -57,7 +59,8 @@ export class AuthForm {
                 }
             },
             error => {
-            this.errorMessage = <any>error
+                this.errorMessage = <any>error;
+                this.errorHandler();
                 this.dismissLoader();
             });
     }
@@ -75,6 +78,14 @@ export class AuthForm {
         this.navCtrl.push(AuthOTP, {
             user: user
         });
+    }
+
+    private errorHandler() {
+        if (this.errorMessage.data != undefined) {
+            this.showAlert("Ooops", this.errorMessage.data);
+        } else {
+            this.showAlert("Ooops", "Something Wrong. Please try again.");
+        }
     }
 
     private showLoader() {

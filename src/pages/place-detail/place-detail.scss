@@ -18,9 +18,22 @@
   ion-datetime {
     color : $fire-brick-color;
   }
+
+  .secondary-title{
+  font-size: 14px;
+  color: $subtitle-color;
 }
 
-.picker-md .picker-wrapper{
+  .place-name {
+    font-size: 22px;
+  }
+
+  .address {
+    @extend .secondary-title;
+    font-size: 16px;
+  }
+
+  .picker-md .picker-wrapper{
     background: $background-white;
   }
 
@@ -36,10 +49,7 @@
   color : $toolbar-background;
 }
 
-.secondary-title{
-  font-size: 14px;
-  color: $subtitle-color;
-}
+
 
 .button-inner {
   flex-flow: column;
@@ -69,15 +79,6 @@
   margin-bottom: 10px;
 }
 
-.place-name {
-  font-size: 22px;
-}
-
-.address {
-  @extend .secondary-title;
-  font-size: 16px;
-}
-
 .rate-title{
   padding-bottom: 5px;
 }
@@ -93,7 +94,7 @@
 
 .facility-text{
   white-space: normal;
-
+}
 }
 
 

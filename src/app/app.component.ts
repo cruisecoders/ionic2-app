@@ -8,6 +8,7 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from 'ionic-native';
 import { AuthForm } from '../pages/auth-form/auth-form';
 import { tokenNotExpired } from 'angular2-jwt';
+import { Splashscreen } from 'ionic-native';
 
 @Component({
   template: `
@@ -48,6 +49,10 @@ export class MyApp implements OnInit {
     this.storage = new Storage();
 
     platform.ready().then(() => {
+
+      setTimeout(() => {
+        Splashscreen.hide();
+      }, 1000);
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();

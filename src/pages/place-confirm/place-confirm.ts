@@ -3,7 +3,7 @@ import { AuthService } from '../../providers/auth-service';
 import { User } from '../auth-form/user';
 import { APP_CONFIG, AppConfig } from '../../app/app-config';
 import { Component, Inject, OnInit } from '@angular/core';
-import { LoadingController, NavController, NavParams } from 'ionic-angular';
+import { AlertController, LoadingController, NavController, NavParams } from 'ionic-angular';
 
 @Component({
     templateUrl: 'place-confirm.html'
@@ -15,13 +15,13 @@ export class PlaceConfirm implements OnInit {
     public dateLabel: string;
     public guestMsg: string;
     public roomLeftMsg: string;
-    public booking: {};
+    public booking: { place: any };
     public errorMessage: any;
     public cancelActivity: string;
     public loading: any;
     public freshenupType: string;
     public luggageType: string;
-    public title : string;
+    public title: string;
 
     constructor(
         private navParams: NavParams,
@@ -29,7 +29,8 @@ export class PlaceConfirm implements OnInit {
         @Inject(APP_CONFIG) private config: AppConfig,
         private authService: AuthService,
         private luggageService: LuggageService,
-        public loadingCtrl: LoadingController
+        public loadingCtrl: LoadingController,
+        private alertController: AlertController
     ) {
         this.imgPath = config.apiImgEndPoint;
         this.cancelActivity = config.Checkin_Date_Cancelled;
@@ -51,15 +52,33 @@ export class PlaceConfirm implements OnInit {
         this.showLoader();
         this.luggageService.cancelBooking(this.booking).subscribe(
             data => {
-                this.title = "Booking Cancelled : "+data.id;
+                this.title = "Booking Cancelled : " + data.id;
                 this.booking = data;
                 this.dismissLoader();
             },
             error => {
-                this.errorMessage = <any>error
+                this.errorMessage = <any>error;
+                this.errorHandler();
                 this.dismissLoader();
             }
         );
+    }
+
+    private errorHandler() {
+        if (this.errorMessage.data != undefined) {
+            this.showAlert("Ooops", this.errorMessage.data);
+        } else {
+            this.showAlert("Ooops", "Something Wrong. Please try again.");
+        }
+    }
+
+    showAlert(title: string, subtitle: string): void {
+        let alert = this.alertController.create({
+            title: title,
+            subTitle: subtitle,
+            buttons: ['OK']
+        });
+        alert.present();
     }
 
     private showLoader() {

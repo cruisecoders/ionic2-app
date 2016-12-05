@@ -4,7 +4,7 @@
             <ion-icon name="menu"></ion-icon>
         </button>
         <ion-title>
-            <img src="assets/images/pokeball.png" alt="" style="width: 18px;height: 18px;vertical-align: middle;" />
+            <img src="assets/images/logo.png" alt="" style="width: 22px;height: 22px;vertical-align: middle;" />
             <strong>{{title}}</strong>
         </ion-title>
     </ion-navbar>
@@ -23,9 +23,9 @@
                 </ion-card-title>
                 <ion-item class="card-ion-item">
                     <span item-left class="date-title">Date:</span>
-                    <span item-left class="date-val">{{ booking.bookingStatus.activityDate | date:'MMM, d' }}</span>
+                    <span item-left class="date-val">{{ booking.checkinDate | date:'MMM, d' }}</span>
                     <span item-right class="date-title">Status:</span>
-                    <span item-right class="date-val">{{ booking.bookingStatus.activity | bookingStatusPipe}}</span>
+                    <span item-right class="date-val">{{ booking.activity | bookingStatusPipe}}</span>
                 </ion-item>
             </ion-card-content>
         </ion-card>

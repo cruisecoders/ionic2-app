@@ -4,7 +4,7 @@ import { AuthService } from '../../providers/auth-service';
 import { User } from '../auth-form/user';
 import { APP_CONFIG, AppConfig } from '../../app/app-config';
 import { Component, Inject, OnInit } from '@angular/core';
-import { LoadingController, NavController, NavParams } from 'ionic-angular';
+import { AlertController, LoadingController, NavController, NavParams, ViewController } from 'ionic-angular';
 
 @Component({
   templateUrl: 'place-detail.html'
@@ -27,7 +27,9 @@ export class PlaceDetail implements OnInit {
     @Inject(APP_CONFIG) private config: AppConfig,
     private authService: AuthService,
     private luggageService: LuggageService,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    private alertController: AlertController,
+    private viewCtrl: ViewController
   ) { this.imgPath = config.apiImgEndPoint; }
 
   ngOnInit() {
@@ -66,29 +68,53 @@ export class PlaceDetail implements OnInit {
 
     this.luggageService.submitBooking(this.booking).subscribe(
       data => {
-        this.navCtrl.pop();
+        //this.navCtrl.pop();
+
         this.navCtrl.push(PlaceConfirm, {
           booking: data,
           config: this.navParams.data.config,
-          title: "Booked Successfully : "+data.id
+          title: "Booked Successfully : " + data.id
+        }).then(() => {
+          // first we find the index of the current view controller:
+          const index = this.viewCtrl.index;
+          // then we remove it from the navigation stack
+          this.navCtrl.remove(index);
         });
         this.dismissLoader();
       },
-      error =>{ 
-        this.errorMessage = <any>error 
-        this.dismissLoader();        
+      error => {
+        this.errorMessage = <any>error;
+        this.errorHandler();
+        this.dismissLoader();
       }
     );
   }
 
-  private showLoader(){
-     this.loading = this.loadingCtrl.create({
+  private errorHandler() {
+    if (this.errorMessage.data != undefined) {
+      this.showAlert("Ooops", this.errorMessage.data);
+    } else {
+      this.showAlert("Ooops", "Something Wrong. Please try again.");
+    }
+  }
+
+  showAlert(title: string, subtitle: string): void {
+    let alert = this.alertController.create({
+      title: title,
+      subTitle: subtitle,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+
+  private showLoader() {
+    this.loading = this.loadingCtrl.create({
       content: 'Please wait...'
     });
     this.loading.present();
   }
 
-  private dismissLoader(){
+  private dismissLoader() {
     this.loading.dismiss();
   }
 
