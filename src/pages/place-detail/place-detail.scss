@@ -20,9 +20,9 @@
   }
 
   .secondary-title{
-  font-size: 14px;
-  color: $subtitle-color;
-}
+    font-size: 14px;
+    color: $subtitle-color;
+  }
 
   .place-name {
     font-size: 22px;
@@ -37,65 +37,79 @@
     background: $background-white;
   }
 
-.picker-md .picker-toolbar {
+  .picker-md .picker-toolbar {
     background: $background-white;
+  }
+
+  .picker-md .picker-button{
+    color : $toolbar-background;
+  }
+
+  .picker-md .picker-opt-selected{
+    color : $toolbar-background;
+  }
+
+  .button-inner {
+    flex-flow: column;
+  }
+
+  .rate-block {
+      border-width: 0px 1px 0px 1px;
+      border-color: $secondary-color;
+      color: black;
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  }
+
+  .rate-block-active {
+      color: white;
+      border-color: $secondary-color;
+      background-color: $secondary-color;
+  }
+
+  .rate-md-block {
+      height: 5.6rem;
+      border-radius: 0px;
+  }
+
+  .rate-msg{
+    @extend .secondary-title;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .rate-title{
+    padding-bottom: 5px;
+  }
+
+  .ten-px-margin{
+    margin-top: 10px;
+  }
+
+  .icon-size{
+    width: 50px;
+    height: 50px;
+  }
+
+  .facility-text{
+    white-space: normal;
+  }
+
+  .edit-user-detail{
+    color:$toolbar-background;
+  }
+
+
 }
+  .edit-user-detail-alert{
 
-.picker-md .picker-button{
-  color : $toolbar-background;
-}
+    .alert-wrapper{
+      border-radius: 25px;
+      background-color: white;
+    }
 
-.picker-md .picker-opt-selected{
-  color : $toolbar-background;
-}
-
-
-
-.button-inner {
-  flex-flow: column;
-}
-
-.rate-block {
-    border-width: 0px 1px 0px 1px;
-    border-color: $secondary-color;
-    color: black;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-}
-
-.rate-block-active {
-    color: white;
-    border-color: $secondary-color;
-    background-color: $secondary-color;
-}
-
-.rate-md-block {
-     height: 5.6rem;
-     border-radius: 0px;
-}
-
-.rate-msg{
-  @extend .secondary-title;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.rate-title{
-  padding-bottom: 5px;
-}
-
-.ten-px-margin{
-  margin-top: 10px;
-}
-
-.icon-size{
-  width: 50px;
-  height: 50px;
-}
-
-.facility-text{
-  white-space: normal;
-}
-}
-
+    .alert-input-wrapper{
+      margin-top: 10px;
+    }
+  }
 
 

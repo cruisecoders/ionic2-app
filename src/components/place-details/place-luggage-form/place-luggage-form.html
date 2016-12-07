@@ -28,7 +28,9 @@
         Guest name
       </ion-col>
       <ion-col width-67 text-right>
-        <span ion-text color="dark">{{user.firstName}} <ion-icon name="edit"></ion-icon></span>
+        <span ion-text color="dark" (click)="showUserDetail()">{{displayName}} 
+          <ion-icon class="edit-user-detail" name="create" md="md-create"></ion-icon>
+        </span>
       </ion-col>
     </ion-row>
   </ion-item>

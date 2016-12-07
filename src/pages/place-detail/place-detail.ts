@@ -57,9 +57,18 @@ export class PlaceDetail implements OnInit {
   confirmBooking(event): void {
     this.showLoader();
 
+    let guestName: string = this.user.firstName;
+    let guestNumber: number = this.user.number;
+
+    if (event.updatedUser.name != '' && event.updatedUser.number != 0) {
+      guestName = event.updatedUser.name;
+      guestNumber = event.updatedUser.number;
+    }
+
     this.booking = {
       userId: this.user.id,
-      number: this.user.number,
+      guestName: guestName,
+      number: guestNumber,
       payment: { paymentMode: this.config.COD, rateType: event.rate.type, payAmount: event.rate.rate, payStatus: this.config.Pending },
       place: this.place,
       bookingDate: event.date,
