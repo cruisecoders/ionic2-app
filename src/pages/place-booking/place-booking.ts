@@ -10,15 +10,16 @@ import { PlaceDetail } from '../place-detail/place-detail';
 
 export class PlaceBooking implements OnInit {
 
-  public showList: boolean = true;
+  public showList: boolean = false;
   public title: string;
   public autocompleteItems: any[] = [];
+  public cities: any[] = [];
   public placeList: any[] = [];
   public errorMessage: any;
   private config: string;
   public loading: any;
 
-  public autocomplete:  {id:number, name:string } = {id:0, name : ""};
+  public autocomplete: { id: number, name: string } = { id: 0, name: "" };
 
   constructor(
     private navParams: NavParams,
@@ -33,42 +34,47 @@ export class PlaceBooking implements OnInit {
     this.title = this.navParams.data.title;
   }
 
-/*  ionViewWillEnter() {
-    if(this.autocomplete.name != ""){
-      this.getPlacesByCityAndPlaceType(this.autocomplete, this.config);
-    }
-  }*/
+  /*  ionViewWillEnter() {
+      if(this.autocomplete.name != ""){
+        this.getPlacesByCityAndPlaceType(this.autocomplete, this.config);
+      }
+    }*/
+
+  ionViewDidEnter(): void {
+    this.showLoader();
+    this.luggageService.getCities().subscribe(
+      data => {
+        this.cities = data;
+        this.dismissLoader();
+      },
+      error => {
+        this.errorMessage = <any>error;
+        this.errorHandler();
+        this.dismissLoader();
+      }
+    )
+  }
 
   chooseItem(item: any): void {
-    this.autocomplete = item;
+    this.autocomplete = Object.assign({}, item);
     this.showList = false;
     this.getPlacesByCityAndPlaceType(item, this.config);
   }
 
   dismiss(): void {
     this.autocomplete.name = '';
+    this.autocomplete.id = 0;
     this.showList = false;
   }
 
   updateSearch(): void {
     if (this.autocomplete.name == '') {
+      this.showList = false;
       this.autocompleteItems = [];
       return;
     }
-    this._setPlacePredictions();
-  }
-
-  _setPlacePredictions(): void {
     this.showList = true;
-    this.luggageService.getCityByTag(this.autocomplete.name).subscribe(
-      data => {
-        this.autocompleteItems = data;
-      },
-      error => {
-        this.errorMessage = <any>error;
-        this.errorHandler();
-      }
-    )
+    this.autocompleteItems = this.filterItems(this.autocomplete.name, this.cities);
   }
 
   getPlacesByCityAndPlaceType(city: any, placeType: string): void {
@@ -97,11 +103,11 @@ export class PlaceBooking implements OnInit {
     if (this.errorMessage.data != undefined) {
       this.showAlert("Ooops", this.errorMessage.data);
     } else {
-      this.showAlert("Ooops", "Something Wrong. Please try again.");
+      this.showAlert("Ooops", "Please check your internet connection");
     }
   }
 
-  showAlert(title: string, subtitle: string): void {
+  private showAlert(title: string, subtitle: string): void {
     let alert = this.alertController.create({
       title: title,
       subTitle: subtitle,
@@ -120,4 +126,12 @@ export class PlaceBooking implements OnInit {
   private dismissLoader() {
     this.loading.dismiss();
   }
+
+  private filterItems(searchTerm, items): any {
+    return items.filter((item) => {
+      return item.name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
+    });
+
+  }
+
 }

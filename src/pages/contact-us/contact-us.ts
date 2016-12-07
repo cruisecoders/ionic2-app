@@ -48,7 +48,7 @@ export class ContactUs implements OnInit {
     if (this.errorMessage.data != undefined) {
       this.showAlert("Ooops", this.errorMessage.data);
     } else {
-      this.showAlert("Ooops", "Something Wrong. Please try again.");
+      this.showAlert("Ooops", "Please check your internet connection");
     }
   }
 

@@ -42,7 +42,7 @@ export class AuthService {
         return this.coreService.postResource('submitOtp', user);
     }
 
-    public regenerateOTP(user: any): any {
+    public regenerateOTP(user: User): any {
         return this.coreService.getResource('regenerateOTP', this.getURLSearchParams("number", user.number + ""));
     }
 

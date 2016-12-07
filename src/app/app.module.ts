@@ -18,8 +18,8 @@ let storage = new Storage();
 
 export function getAuthHttp(http) {
     return new AuthHttp(new AuthConfig({
-        noJwtError: true,
-        globalHeaders: [{'Accept': 'application/json'}],
+        //noJwtError: true,
+        //globalHeaders: [{'Accept': 'application/json'}],
         tokenName: 'jwt',
         tokenGetter: (() => storage.get('jwt'))
     }), http);

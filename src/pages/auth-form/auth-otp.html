@@ -1,7 +1,7 @@
 <ion-header>
     <ion-navbar>
         <ion-title>
-            <img src="assets/images/logo.png" alt="" style="width: 22px;height: 22px;vertical-align: middle;" />
+            <img src="assets/images/newLogo.png" alt="" style="width: 22px;height: 22px;vertical-align: middle;" />
             <strong>Bag2Bag</strong>
         </ion-title>
     </ion-navbar>
@@ -14,6 +14,16 @@
             <ion-label floating>OTP</ion-label>
             <ion-input type="text" [(ngModel)]="user.otp"></ion-input>
         </ion-item>
+
+        <ion-row class="generate-otp-msg">
+            <ion-col>
+                <span>If you don't get OTP then please click
+                        <a (click)="regenerateOTP(user)">here</a>
+                        to generate again.
+                    </span>
+            </ion-col>
+        </ion-row>
+
         <button class="top-margin" ion-button full (click)="submitOTP(user)">Submit OTP</button>
 
     </div>

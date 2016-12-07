@@ -4,7 +4,7 @@
             <ion-icon name="menu"></ion-icon>
         </button>
         <ion-title>
-            <img src="assets/images/logo.png" alt="" style="width: 22px;height: 22px;vertical-align: middle;" />
+            <img src="assets/images/newLogo.png" alt="" style="width: 22px;height: 22px;vertical-align: middle;" />
             <strong>{{title}}</strong>
         </ion-title>
     </ion-navbar>
@@ -12,7 +12,7 @@
     <ion-toolbar no-border-top>
         <ion-searchbar color="primary" [(ngModel)]="autocomplete.name" 
         [showCancelButton]="true" (ionInput)="updateSearch()" 
-        (ionCancel)="dismiss()" placeholder="Enter city : Shirdi"></ion-searchbar>
+        (ionCancel)="dismiss()" placeholder="Please Enter city (eg:Shirdi)"></ion-searchbar>
     </ion-toolbar>
 </ion-header>
 

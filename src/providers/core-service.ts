@@ -12,7 +12,7 @@ export class CoreService {
 
     private api: string;
 
-    constructor( @Inject(APP_CONFIG) config: AppConfig, private http: Http, private authHttp : AuthHttp) {
+    constructor( @Inject(APP_CONFIG) config: AppConfig, private http: Http, private authHttp: AuthHttp) {
         this.api = config.apiEndpoint;
     }
 

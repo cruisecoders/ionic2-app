@@ -1,3 +1,4 @@
+import { BlankPage } from '../pages/blank-page/blank-page';
 import { ContactUs } from '../pages/contact-us/contact-us';
 import { BookingHistory } from '../pages/booking-history/booking-history';
 import { APP_CONFIG, AppConfig } from './app-config';
@@ -33,17 +34,13 @@ import { Splashscreen } from 'ionic-native';
 
   </ion-menu>
   
-  <ion-nav [root]="rootpage" [rootParams]="rootPageParams" #content swipeBackEnabled="false"></ion-nav>
+  <ion-nav [root]="rootpage" #content swipeBackEnabled="false"></ion-nav>
   `
 })
 export class MyApp implements OnInit {
 
   @ViewChild(Nav) nav: Nav;
-  rootpage: any = PlaceBooking;
-  rootPageParams: any = {
-    config: this.apiConfig.FRESHENUP,
-    title: 'Freshen up Booking'
-  }
+  rootpage: any = BlankPage;
   pages: Array<{ title: string, component: any, rootParam: string }>;
 
   storage: Storage;
@@ -64,10 +61,10 @@ export class MyApp implements OnInit {
     });
 
     this.pages = [
-      { title: 'Freshen up Booking', component: PlaceBooking, rootParam: this.apiConfig.FRESHENUP },
+      { title: 'Freshen-up Booking', component: PlaceBooking, rootParam: this.apiConfig.FRESHENUP },
       { title: 'Luggage Booking', component: PlaceBooking, rootParam: this.apiConfig.LUGGAGE },
-      { title: 'Booking Histoy', component: BookingHistory, rootParam: "" },
-      { title: 'Contact Us', component: ContactUs, rootParam: "" }
+      { title: 'Booking History', component: BookingHistory, rootParam: "" },
+      { title: 'Contact us', component: ContactUs, rootParam: "" }
     ];
   }
 
@@ -84,10 +81,10 @@ export class MyApp implements OnInit {
       this.nav.setRoot(AuthForm);
     } else {
       this.authService.setUserProfile();
-      /*this.nav.setRoot(PlaceBooking, {
+      this.nav.setRoot(PlaceBooking, {
         config: this.apiConfig.FRESHENUP,
-        title: 'Freshen up Booking'
-      });*/
+        title: 'Freshen-up Booking'
+      });
     }
   }
 
