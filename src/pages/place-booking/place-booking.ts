@@ -13,7 +13,7 @@ export class PlaceBooking implements OnInit {
   public showList: boolean = false;
   public title: string;
   public autocompleteItems: any[] = [];
-  public cities: any[] = [];
+  public cities: Array<{ id: number, name: String }>;
   public placeList: any[] = [];
   public errorMessage: any;
   private config: string;
@@ -41,18 +41,25 @@ export class PlaceBooking implements OnInit {
     }*/
 
   ionViewDidEnter(): void {
-    this.showLoader();
-    this.luggageService.getCities().subscribe(
-      data => {
-        this.cities = data;
-        this.dismissLoader();
-      },
-      error => {
-        this.errorMessage = <any>error;
-        this.errorHandler();
-        this.dismissLoader();
-      }
-    )
+
+    this.cities = this.luggageService.loadCities();
+
+    if (this.cities == null || this.cities == undefined || this.cities.length == 0) {
+      this.showLoader();
+      this.luggageService.getCities().subscribe(
+        data => {
+          this.cities = data;
+          this.luggageService.setCities(this.cities);
+          this.dismissLoader();
+        },
+        error => {
+          this.errorMessage = <any>error;
+          this.errorHandler();
+          this.dismissLoader();
+        }
+      )
+    }
+
   }
 
   chooseItem(item: any): void {

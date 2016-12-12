@@ -6,18 +6,10 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class LuggageService {
 
+    private cities: Array<{ id: number, name: String }>;
+
 
     constructor(private coreService: CoreService) {
-    }
-
-    public getCityByTag(tag: string): Observable<any> {
-        return this.coreService.getSecuredResource('getCitiesByTag', this.getURLSearchParams("tag", tag));
-    }
-
-    public getPlacesByCityAndPlaceType(city: any, placeType: string): Observable<any> {
-        let params = this.getURLSearchParams("cityId", city.id);
-        params.set("placeType", placeType);
-        return this.coreService.getSecuredResource('getPlacesByCityIdAndType', params);
     }
 
     private getURLSearchParams(key: string, value: string): URLSearchParams {
@@ -48,5 +40,23 @@ export class LuggageService {
     public getCities(): Observable<any> {
         let params = new URLSearchParams();
         return this.coreService.getSecuredResource('cities', params);
+    }
+
+    public loadCities(): Array<{ id: number, name: String }> {
+        return this.cities;
+    }
+
+    public setCities(cities: Array<{ id: number, name: String }>): void {
+        this.cities = cities;
+    }
+
+    public getCityByTag(tag: string): Observable<any> {
+        return this.coreService.getSecuredResource('getCitiesByTag', this.getURLSearchParams("tag", tag));
+    }
+
+    public getPlacesByCityAndPlaceType(city: any, placeType: string): Observable<any> {
+        let params = this.getURLSearchParams("cityId", city.id);
+        params.set("placeType", placeType);
+        return this.coreService.getSecuredResource('getPlacesByCityIdAndType', params);
     }
 }
