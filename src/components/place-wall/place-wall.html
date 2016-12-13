@@ -1,0 +1,28 @@
+<div>
+  <img class="f-image" src="/assets/images/wall-image.png" />
+</div>
+
+<ion-item text-wrap>
+  <ion-scroll scrollX="true">
+    <ion-row>
+      <ion-col width-25 *ngFor="let city of cities">
+        <span>
+          <img class="icon-size" src="assets/images/icons/{{city}}.png" alt="{{city}}"/>
+          <p class="facility-text">{{city}}</p>
+        </span>
+      </ion-col>
+    </ion-row>
+  </ion-scroll>
+</ion-item>
+
+<div>
+  <img class="f-image" src="/assets/images/why-bag2bag.png" />
+</div>
+
+<div>
+  <img class="f-image" src="/assets/images/how-it-works.png" />
+</div>
+
+<div>
+  <img class="f-image" src="/assets/images/enjot-with-bag2bag.png" />
+</div>

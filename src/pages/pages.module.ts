@@ -11,6 +11,7 @@ import { IonicModule } from 'ionic-angular';
 import { PlaceBooking } from '../pages/place-booking/place-booking';
 import { AuthForm } from '../pages/auth-form/auth-form';
 import { PlaceListItem } from '../components/place-list-item/place-list-item';
+import { PlaceWall } from '../components/place-wall/place-wall';
 import { PlaceDetail } from '../pages/place-detail/place-detail';
 
 import { PlaceDetailsModule } from '../components/place-details/place-details.module';
@@ -41,7 +42,8 @@ export const APP_PAGES = [
   ],
   declarations: [
     APP_PAGES,
-    PlaceListItem
+    PlaceListItem,
+    PlaceWall
   ],
   exports: [
     APP_PAGES
