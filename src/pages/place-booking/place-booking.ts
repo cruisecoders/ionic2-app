@@ -11,6 +11,7 @@ import { PlaceDetail } from '../place-detail/place-detail';
 export class PlaceBooking implements OnInit {
 
   public showList: boolean = false;
+  public showWall: boolean = true;
   public title: string;
   public autocompleteItems: any[] = [];
   public cities: Array<{ id: number, name: String }>;
@@ -72,12 +73,16 @@ export class PlaceBooking implements OnInit {
     this.autocomplete.name = '';
     this.autocomplete.id = 0;
     this.showList = false;
+    this.placeList = [];
+    this.showWall = true;
   }
 
   updateSearch(): void {
     if (this.autocomplete.name == '') {
       this.showList = false;
+      this.showWall = true;
       this.autocompleteItems = [];
+      this.placeList = [];
       return;
     }
     this.showList = true;
@@ -88,6 +93,7 @@ export class PlaceBooking implements OnInit {
     this.showLoader();
     this.luggageService.getPlacesByCityAndPlaceType(city, placeType).subscribe(
       data => {
+        this.showWall = false;
         this.placeList = data;
         this.dismissLoader();
       },

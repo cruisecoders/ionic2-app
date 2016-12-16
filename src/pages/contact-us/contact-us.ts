@@ -1,5 +1,5 @@
 import { LuggageService } from '../../providers/luggage-service';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AlertController, LoadingController, NavController, NavParams } from 'ionic-angular';
 
 @Component({

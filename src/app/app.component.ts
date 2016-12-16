@@ -23,10 +23,10 @@ import { Splashscreen } from 'ionic-native';
 
     <ion-content>
       <ion-list>
-        <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+        <button class="nav-item-font-size" menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
           {{p.title}}
         </button>
-        <button menuClose ion-item (click)="logout()">
+        <button class="nav-item-font-size" menuClose ion-item (click)="logout()">
           Logout
         </button>
       </ion-list>

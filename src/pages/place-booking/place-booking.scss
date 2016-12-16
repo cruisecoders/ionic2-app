@@ -29,8 +29,17 @@
     }
   }
 
+  .fifteen-px-margin-top{
+    margin-top: 15px;
+  }
+
   .rate-button{
       font-size: 13PX;
       font-weight: bolder;
     }
+}
+
+.booking-list-header-item{
+  background-color: $background-white;
+  position: inherit;
 }

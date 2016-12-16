@@ -14,16 +14,22 @@
         [showCancelButton]="true" (ionInput)="updateSearch()" 
         (ionCancel)="dismiss()" placeholder="Please Enter city (eg:Shirdi)"></ion-searchbar>
     </ion-toolbar>
-</ion-header>
 
-<ion-content class="place-list">
     <ion-list [hidden]="!showList">
-        <ion-item *ngFor="let item of autocompleteItems" tappable (click)="chooseItem(item)">
+        <ion-item class="booking-list-header-item" *ngFor="let item of autocompleteItems" tappable (click)="chooseItem(item)">
             {{ item.name }}
         </ion-item>
     </ion-list>
+</ion-header>
 
-    <place-wall></place-wall>
+<ion-content class="place-list">
+    <!--<ion-list [hidden]="!showList">
+        <ion-item *ngFor="let item of autocompleteItems" tappable (click)="chooseItem(item)">
+            {{ item.name }}
+        </ion-item>
+    </ion-list>-->
+
+    <place-wall [hidden]="!showWall"></place-wall>
 
     <div *ngIf="placeList.length">
         <ion-list>
