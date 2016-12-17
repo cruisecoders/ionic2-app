@@ -15,7 +15,7 @@ import { Splashscreen } from 'ionic-native';
 @Component({
   template: `
   <ion-menu [content]="content">
-    <ion-header>
+    <ion-header class="show-header">
       <ion-toolbar>
         <ion-title>Menu</ion-title>
       </ion-toolbar>
@@ -24,7 +24,7 @@ import { Splashscreen } from 'ionic-native';
     <ion-content>
       <ion-list>
         <button class="nav-item-font-size" menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-          {{p.title}}
+          {{p.display}}
         </button>
         <button class="nav-item-font-size" menuClose ion-item (click)="logout()">
           Logout
@@ -41,7 +41,7 @@ export class MyApp implements OnInit {
 
   @ViewChild(Nav) nav: Nav;
   rootpage: any = BlankPage;
-  pages: Array<{ title: string, component: any, rootParam: string }>;
+  pages: Array<{ display: string, title: string, component: any, rootParam: string }>;
 
   storage: Storage;
 
@@ -61,10 +61,10 @@ export class MyApp implements OnInit {
     });
 
     this.pages = [
-      { title: 'Freshen-up Booking', component: PlaceBooking, rootParam: this.apiConfig.FRESHENUP },
-      { title: 'Luggage Booking', component: PlaceBooking, rootParam: this.apiConfig.LUGGAGE },
-      { title: 'Booking History', component: BookingHistory, rootParam: "" },
-      { title: 'Contact us', component: ContactUs, rootParam: "" }
+      { display : 'Freshen-up Booking', title: 'Freshen-up', component: PlaceBooking, rootParam: this.apiConfig.FRESHENUP },
+      { display : 'Luggage Booking', title: 'Luggage', component: PlaceBooking, rootParam: this.apiConfig.LUGGAGE },
+      { display : 'Booking History', title: 'Bookings', component: BookingHistory, rootParam: "" },
+      { display : 'Contact us', title: 'Contact us', component: ContactUs, rootParam: "" }
     ];
   }
 
@@ -83,7 +83,7 @@ export class MyApp implements OnInit {
       this.authService.setUserProfile();
       this.nav.setRoot(PlaceBooking, {
         config: this.apiConfig.FRESHENUP,
-        title: 'Freshen-up Booking'
+        title: 'Freshen-up'
       });
     }
   }

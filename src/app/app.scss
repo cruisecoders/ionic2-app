@@ -19,3 +19,46 @@
     font-size: 19px;
     color: #004D40;
 }
+
+.header-md::after{
+    position: fixed !important;
+}
+
+.transparent-header{
+
+    .toolbar-background-md{
+        background: transparent;
+    }
+
+    .toolbar-background-ios{
+        background: transparent;
+    }
+
+    .toolbar-background-ios {
+        border-bottom-width: 0px;
+    }
+}
+
+.full-content{
+    .fixed-content{
+        margin-top: 0px !important;
+    }
+
+    .scroll-content{
+        padding-top: 0px !important;
+    }
+}
+
+.searchbar-input{
+    border-radius: 22px !important;
+}
+
+
+
+/* .show-header{
+     .toolbar-background-md {
+        background: $toolbar-background;
+    }
+ }*/
+
+ 

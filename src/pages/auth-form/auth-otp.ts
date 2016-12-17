@@ -32,7 +32,7 @@ export class AuthOTP implements OnInit {
                 this.authService.storeUserProfile(data.userInfo);
                 this.navCtrl.setRoot(PlaceBooking, {
                     config: this.config.FRESHENUP,
-                    title: 'Freshen-up Booking'
+                    title: 'Freshen-up'
                 });
                 this.dismissLoader();
             },

@@ -10,12 +10,12 @@
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/v2/theming/overriding-ionic-variables/
 
-$text-color:        #000;
+$text-color:        #212121;
 $background-color:  #f4f4f4;
-$toolbar-background: #00796B;
+$toolbar-background: #388E3C;
 $background-white: #fff;
-$subtitle-color: #999;
-$secondary-color:#009688;
+$subtitle-color: #424242;
+$secondary-color:#4CAF50;
 $fire-brick-color: #B22222;
 
 // Named Color Variables
@@ -27,8 +27,8 @@ $fire-brick-color: #B22222;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #00796B,
-  secondary:  #009688,
+  primary:    #388E3C,
+  secondary:  #4CAF50,
   danger:     #f53d3d,
   light:      #f4f4f4,
   dark:       #B22222,

@@ -37,6 +37,27 @@
       font-size: 13PX;
       font-weight: bolder;
     }
+
+  .ion-item-heading{
+    height: 56%;
+    //background-color: $secondary-color;
+    background-image: url('/assets/images/wall-image.png');
+    background-size: cover;
+  }
+
+  .ion-row-heading{
+    margin-top: 85%;
+  }
+
+  .place-item-margin{
+    margin-top: 5%;
+  }
+
+  .autocomplete-list{
+    position: fixed;
+    left: 7%;
+    width: 85%;
+  }
 }
 
 .booking-list-header-item{
