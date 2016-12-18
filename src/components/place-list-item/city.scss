@@ -1,0 +1,19 @@
+.city-list{
+    background-color: white;
+
+    ion-item-divider{
+       background-color: #dedede;
+    }
+
+    ion-scroll {
+      white-space: nowrap;
+      height: 100px;
+      background-color : $background-white;
+    }
+
+    .autocomplete-list{
+        position: fixed;
+        left: 7%;
+        width: 85%;
+    }
+}

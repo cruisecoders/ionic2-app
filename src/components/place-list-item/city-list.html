@@ -1,0 +1,21 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            <img src="assets/images/newLogo.png" alt="" style="width: 22px;height: 22px;vertical-align: middle;" />
+            <strong>Select City</strong>
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content class="city-list">
+    <ion-searchbar [(ngModel)]="autocomplete.name" [showCancelButton]="true" (ionInput)="updateSearch()" (ionCancel)="dismiss()"
+        placeholder="Please Enter City (eg:Shirdi)"></ion-searchbar>
+    <ion-list [hidden]="!showList" class="autocomplete-list">
+        <ion-item color="white" *ngFor="let item of autocompleteItems" tappable (click)="chooseItem(item)">
+            {{ item.name }}
+        </ion-item>
+    </ion-list>
+    <ion-item-group [hidden]="showList">
+        <ion-item-divider color="light">Select City</ion-item-divider>
+        <ion-item color="white" *ngFor="let city of cities" (click)="chooseItem(city)">{{city.name}}</ion-item>
+    </ion-item-group>
+</ion-content>

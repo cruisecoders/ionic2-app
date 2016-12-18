@@ -23,7 +23,7 @@
     <ion-row class="place-detail-row-height">
       <ion-col text-left width-33><span class="detail-heading">Primary Guest</span>
         <br>
-        <div class="detail-title">{{user.firstName}}</div>
+        <div class="detail-title">{{booking.guestName}}</div>
       </ion-col>
       <ion-col text-center width-33><span class="detail-heading">Guest</span>
         <br>
@@ -51,9 +51,9 @@
     <ion-row *ngIf="booking.activity != cancelActivity">
       <button ion-button full color="secondary" (click)="cancelBooking()">Cancel Booking</button>
     </ion-row>
-    <ion-row *ngIf="booking.activity == cancelActivity">
+   <!-- <ion-row *ngIf="booking.activity == cancelActivity">
       <button ion-button full color="secondary" (click)="backToPlaces()">Back to bookings</button>
-    </ion-row>
+    </ion-row>-->
   </ion-item>
 
 </div>

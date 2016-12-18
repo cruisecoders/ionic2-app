@@ -1,3 +1,4 @@
+import { CityList } from '../components/place-list-item/city-list';
 import { BlankPage } from './blank-page/blank-page';
 import { ContactUs } from './contact-us/contact-us';
 import { BookingHistory } from './booking-history/booking-history';
@@ -11,7 +12,6 @@ import { IonicModule } from 'ionic-angular';
 import { PlaceBooking } from '../pages/place-booking/place-booking';
 import { AuthForm } from '../pages/auth-form/auth-form';
 import { PlaceListItem } from '../components/place-list-item/place-list-item';
-import { PlaceWall } from '../components/place-wall/place-wall';
 import { PlaceDetail } from '../pages/place-detail/place-detail';
 
 import { PlaceDetailsModule } from '../components/place-details/place-details.module';
@@ -24,10 +24,13 @@ export const APP_PAGES = [
   AuthForm,
   AuthOTP,
   ContactUs,
-  BlankPage
+  BlankPage,
+  CityList,
+  PlaceListItem
 ];
 
 @NgModule({
+
   imports: [
     SharedModule,
     PlaceDetailsModule,
@@ -38,12 +41,12 @@ export const APP_PAGES = [
     IonicModule.forRoot(PlaceConfirm),
     IonicModule.forRoot(BookingHistory),
     IonicModule.forRoot(ContactUs),
-    IonicModule.forRoot(BlankPage)
+    IonicModule.forRoot(BlankPage),
+    IonicModule.forRoot(CityList),
+    IonicModule.forRoot(PlaceListItem)
   ],
   declarations: [
-    APP_PAGES,
-    PlaceListItem,
-    PlaceWall
+    APP_PAGES
   ],
   exports: [
     APP_PAGES

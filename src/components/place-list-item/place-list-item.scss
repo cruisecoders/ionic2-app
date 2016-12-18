@@ -1,6 +1,13 @@
-.home {
+.place-list{
+    .place-item-margin{
+        margin-top: 5%;
+    }
+    .rate-button{
+      font-size: 13PX;
+      font-weight: bolder;
+    }
 
-  ion-item {
+    ion-item {
     background-color: $background-white;
 
     ion-col {
@@ -28,18 +35,4 @@
       height: 50px;
     }
   }
-
-  .ion-item-heading{
-    background-image: url('../assets/images/wall-image.png');
-    background-size: cover;
-  }
-
-  .ion-row-heading{
-    margin-top: 85%;
-  }
-}
-
-.booking-list-header-item{
-  background-color: $background-white;
-  position: inherit;
 }

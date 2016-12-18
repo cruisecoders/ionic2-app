@@ -1,8 +1,5 @@
 <ion-header class="transparent-header">
   <ion-navbar>
-    <!--<ion-title>
-      <strong *ngIf="booking.place">{{title}}</strong>
-    </ion-title>-->
   </ion-navbar>
 </ion-header>
 
@@ -10,9 +7,9 @@
   <div *ngIf="booking.place">
 
     <div>
-      <!--<a class="arrow arrow-left" role="button" (click)="goToPreviousPokemon()"></a>-->
+      
       <img src="{{ imgPath }}{{ booking.place.frontImg }}" alt="{{ booking.place.name }}">
-      <!--<a class="arrow arrow-right" role="button" (click)="goToNextPokemon()"></a>-->
+      
     </div>
 
     <place-confirm-detail [booking]="booking" [user]="user" [cancelActivity]="cancelActivity" (clicked)="cancelBooking($event)"

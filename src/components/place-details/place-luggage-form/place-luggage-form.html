@@ -17,9 +17,13 @@
         <div>{{rate.rate | currency:'INR':true:'1.0-0'}}</div>
       </button>
     </ion-row>
-    <ion-row>
-      <span class="rate-msg" color="dark">{{roomLeftMsg}}</span>
+    <ion-row *ngIf="place.reservedRooms != 0" >
+      <span class="rate-msg red-brick-color" >{{roomLeftMsg}}</span>
     </ion-row>
+    <ion-row *ngIf="place.reservedRooms == 0">
+      <span class="rate-msg red-brick-color" >Sold out</span>
+    </ion-row>
+    
   </ion-item>
 
   <ion-item class="ten-px-margin">
@@ -56,9 +60,12 @@
   </ion-item>
 
   <ion-item>
-    <!--<ion-row>Test</ion-row>-->
     <ion-row>
-      <button ion-button full color="secondary" (click)="confirmBooking()">Confirm Booking</button>
+      <button ion-button full color="secondary" (click)="confirmBooking()"
+      [disabled]="place.reservedRooms == 0"
+      >
+      Confirm Booking
+      </button>
     </ion-row>
   </ion-item>
 </div>

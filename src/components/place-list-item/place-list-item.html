@@ -1,12 +1,23 @@
-<div class="place-item-margin" (click)="goToPlaceDetail()">
-  <img class="f-image" src="{{imgPath}}{{place.frontImg}}" />
+<ion-header [ngClass]="{'transparent-header': placeList.length != 0}">
+    <ion-navbar>
+      <ion-title *ngIf="placeList.length == 0" >
+        <strong>Places not found</strong>
+      </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content class="place-list full-content" fullscreen="true">
+  <div *ngFor="let place of placeList" (click)="goToPlaceDetail(place)">
+    <img class="f-image" src="{{imgPath}}{{place.frontImg}}" />
 
-  <ion-item>
-    <ion-row>
-      <ion-col width-75 text-left>{{place.name}}</ion-col>
-      <ion-col width-25 text-left>
-        <button class="rate-button" ion-button color="secondary" small>{{place.startingRate | currency:'INR':true:'1.0-0'}}</button>
-      </ion-col>
-    </ion-row>
-  </ion-item>
-</div>
+    <ion-item>
+      <ion-row>
+        <ion-col width-75 text-left>{{place.name}}</ion-col>
+        <ion-col width-25 text-left>
+          <button class="rate-button" ion-button color="secondary" small>{{place.startingRate | currency:'INR':true:'1.0-0'}}</button>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    <div class="place-item-margin"><!-- empty div for margin --></div>
+  </div>
+  
+</ion-content>

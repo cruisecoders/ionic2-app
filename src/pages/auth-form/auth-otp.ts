@@ -31,8 +31,8 @@ export class AuthOTP implements OnInit {
                 this.authService.storeToken(data.token);
                 this.authService.storeUserProfile(data.userInfo);
                 this.navCtrl.setRoot(PlaceBooking, {
-                    config: this.config.FRESHENUP,
-                    title: 'Freshen-up'
+                    //config: this.config.FRESHENUP,
+                    title: 'Home'
                 });
                 this.dismissLoader();
             },

@@ -1,11 +1,10 @@
 import { BlankPage } from '../pages/blank-page/blank-page';
 import { ContactUs } from '../pages/contact-us/contact-us';
 import { BookingHistory } from '../pages/booking-history/booking-history';
-import { APP_CONFIG, AppConfig } from './app-config';
 import { Storage } from '@ionic/storage';
 import { AuthService } from '../providers/auth-service';
 import { PlaceBooking } from '../pages/place-booking/place-booking';
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from 'ionic-native';
 import { AuthForm } from '../pages/auth-form/auth-form';
@@ -46,8 +45,8 @@ export class MyApp implements OnInit {
   storage: Storage;
 
   constructor(platform: Platform,
-    private authService: AuthService,
-    @Inject(APP_CONFIG) private apiConfig: AppConfig) {
+    private authService: AuthService
+  ) {
     this.storage = new Storage();
 
     platform.ready().then(() => {
@@ -61,10 +60,9 @@ export class MyApp implements OnInit {
     });
 
     this.pages = [
-      { display : 'Freshen-up Booking', title: 'Freshen-up', component: PlaceBooking, rootParam: this.apiConfig.FRESHENUP },
-      { display : 'Luggage Booking', title: 'Luggage', component: PlaceBooking, rootParam: this.apiConfig.LUGGAGE },
-      { display : 'Booking History', title: 'Bookings', component: BookingHistory, rootParam: "" },
-      { display : 'Contact us', title: 'Contact us', component: ContactUs, rootParam: "" }
+      { display: 'Home', title: 'Home', component: PlaceBooking, rootParam: "" },
+      { display: 'Booking History', title: 'Bookings', component: BookingHistory, rootParam: "" },
+      { display: 'Contact us', title: 'Contact us', component: ContactUs, rootParam: "" }
     ];
   }
 
@@ -82,8 +80,7 @@ export class MyApp implements OnInit {
     } else {
       this.authService.setUserProfile();
       this.nav.setRoot(PlaceBooking, {
-        config: this.apiConfig.FRESHENUP,
-        title: 'Freshen-up'
+        title: 'Home'
       });
     }
   }

@@ -30,7 +30,6 @@
 
   .address {
     @extend .secondary-title;
-    font-size: 16px;
   }
 
   .picker-md .picker-wrapper{
@@ -75,6 +74,10 @@
     @extend .secondary-title;
     margin-top: 10px;
     margin-bottom: 10px;
+  }
+
+  .red-brick-color{
+    color: $fire-brick-color !important;
   }
 
   .rate-title{

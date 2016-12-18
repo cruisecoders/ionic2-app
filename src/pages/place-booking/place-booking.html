@@ -10,23 +10,19 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content class="place-list full-content" fullscreen="true">
+<ion-content class="home full-content" fullscreen="true">
     <ion-item class="ion-item-heading">
         <ion-row class="ion-row-heading">
-            <ion-searchbar color="primary" [(ngModel)]="autocomplete.name" [showCancelButton]="true" (ionInput)="updateSearch()" (ionCancel)="dismiss()"
-                placeholder="Please Enter City (eg:Shirdi)"></ion-searchbar>
+
         </ion-row>
-        <ion-list [hidden]="!showList" class="autocomplete-list">
-            <ion-item *ngFor="let item of autocompleteItems" tappable (click)="chooseItem(item)">
-                {{ item.name }}
-            </ion-item>
-        </ion-list>
+
     </ion-item>
 
-    <div *ngIf="placeList.length">
-        <ion-list>
-            <place-list-item *ngFor="let place of placeList" [place]="place" (clicked)=goToPlaceDetail($event)>
-            </place-list-item>
-        </ion-list>
-    </div>
+    <ion-item>
+        <a (click)="gotoCityPage(this.apiConfig.FRESHENUP)">Freshen up booking</a>
+    </ion-item>
+    <ion-item>
+        <a (click)="gotoCityPage(this.apiConfig.LUGGAGE)">Luggage booking</a>
+    </ion-item>
+
 </ion-content>
