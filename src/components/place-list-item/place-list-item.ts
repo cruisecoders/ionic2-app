@@ -31,8 +31,6 @@ export class PlaceListItem implements OnInit {
   ngOnInit() {
     this.config = this.navParams.data.config;
     this.city = this.navParams.data.city;
-    console.log(this.config);
-    console.log(this.city);
     this.getPlacesByCityAndPlaceType(this.city, this.config);
   }
 

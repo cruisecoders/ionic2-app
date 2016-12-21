@@ -69,7 +69,6 @@ export class CityList implements OnInit {
     }
 
     updateSearch(): void {
-        console.log("update search");
         if (this.autocomplete.name == '') {
             this.showList = false;
             return;

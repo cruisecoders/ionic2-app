@@ -18,11 +18,32 @@
 
     </ion-item>
 
-    <ion-item>
-        <a (click)="gotoCityPage(this.apiConfig.FRESHENUP)">Freshen up booking</a>
+    <ion-item class="option-item" text-wrap>
+        <a (click)="gotoCityPage(this.apiConfig.FRESHENUP)">
+            <img class="option-image-size" src="assets/images/freshenup.png"/>
+        </a>
+        <div class="option-title" (click)="gotoCityPage(this.apiConfig.FRESHENUP)">Freshen-up</div>
     </ion-item>
-    <ion-item>
-        <a (click)="gotoCityPage(this.apiConfig.LUGGAGE)">Luggage booking</a>
+
+    <ion-item class="option-item" text-wrap>
+        <a (click)="gotoCityPage(this.apiConfig.LUGGAGE)">
+            <img class="option-image-size" src="assets/images/luggage.png"/>
+        </a>
+        <div class="option-title" (click)="gotoCityPage(this.apiConfig.LUGGAGE)">Luggage booking</div>
+    </ion-item>
+
+    <ion-item class="option-item" text-wrap>
+        <a>
+            <img src="assets/images/pick-up-drop-facility.png"/>
+        </a>
+        <div class="option-title-1">Now offering</div>      
+        <div class="option-title-2">Pick-up and Drop off services</div>      
+    </ion-item>
+
+    <ion-item class="option-item" text-wrap>
+        <a>
+            <img class="why-bag2bag-image-size" src="assets/images/why-bag2bag.png"/>
+        </a>  
     </ion-item>
 
 </ion-content>

@@ -61,7 +61,7 @@ export class MyApp implements OnInit {
 
     this.pages = [
       { display: 'Home', title: 'Home', component: PlaceBooking, rootParam: "" },
-      { display: 'Booking History', title: 'Bookings', component: BookingHistory, rootParam: "" },
+      { display: 'My Bookings', title: 'Bookings', component: BookingHistory, rootParam: "" },
       { display: 'Contact us', title: 'Contact us', component: ContactUs, rootParam: "" }
     ];
   }
