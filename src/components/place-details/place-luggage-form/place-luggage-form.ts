@@ -19,6 +19,7 @@ export class PlaceLuggageForm implements OnInit {
   currentDate: Date = new Date();
   startDate: String = this.currentDate.toISOString();
   selDate: String = this.currentDate.toISOString();
+  lastDate: String;
   endDate: String = this.getDate();
   selectedRate: any = new Object();
   updatedUser: { name: string, number: number } = { name: '', number: 0 };
@@ -57,10 +58,24 @@ export class PlaceLuggageForm implements OnInit {
   }
 
   dateChanged(selDate: any) {
+
+    if (this.lastDate == selDate) {
+      console.log("same last");
+      return;
+    }
+
     if (selDate == this.startDate) {
-      console.log("same");
+      
+      if(this.lastDate){
+        this.dateChangedEvent.emit({ onDate: selDate });
+      }else{
+        console.log("same starting date")
+        return;
+      }
+
     } else {
       console.log("diff");
+      this.lastDate = new String(selDate);
       this.dateChangedEvent.emit({ onDate: selDate });
     }
   }

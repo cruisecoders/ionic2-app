@@ -14,10 +14,10 @@ import { NavController, NavParams, ViewController } from 'ionic-angular';
 export class PlaceDetail implements OnInit {
 
   @ViewChild(PlaceLuggageForm)
-  private placeLuggageForm: PlaceLuggageForm;
+  public placeLuggageForm: PlaceLuggageForm;
 
   @ViewChild(Loader)
-  private loader: Loader;
+  public loader: Loader;
 
   public place: any = {};
   public imgPath: string;

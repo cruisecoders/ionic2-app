@@ -12,7 +12,7 @@ import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 export class PlaceListItem implements OnInit {
 
   @ViewChild(Loader)
-  private loader: Loader;
+  public loader: Loader;
 
   public imgPath: string;
   public placeList: any[] = [];

@@ -12,7 +12,7 @@ import { NavController, NavParams } from 'ionic-angular';
 export class PlaceConfirm implements OnInit {
 
     @ViewChild(Loader)
-    private loader: Loader;
+    public loader: Loader;
 
     public imgPath: string;
     public user: User;

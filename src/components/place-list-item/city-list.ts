@@ -10,7 +10,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 export class CityList implements OnInit {
 
     @ViewChild(Loader)
-    private loader: Loader;
+    public loader: Loader;
 
     public autocomplete: { id: number, name: string } = { id: 0, name: "" };
     public cities: Array<{ id: number, name: String }>;

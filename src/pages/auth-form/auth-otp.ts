@@ -14,7 +14,7 @@ import { PlaceBooking } from '../place-booking/place-booking';
 export class AuthOTP implements OnInit {
 
     @ViewChild(Loader)
-    private loader: Loader;
+    public loader: Loader;
 
     user: User;
     errorMessage: any;

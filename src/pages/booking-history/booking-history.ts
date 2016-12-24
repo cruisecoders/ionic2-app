@@ -15,7 +15,7 @@ import { NavController, NavParams } from 'ionic-angular';
 export class BookingHistory implements OnInit {
 
   @ViewChild(Loader)
-  private loader: Loader;
+  public loader: Loader;
 
   public showList: boolean = true;
   public title: string;

@@ -15,7 +15,7 @@ import 'rxjs/add/operator/catch';
 export class AuthForm {
 
     @ViewChild(Loader)
-    private loader: Loader;
+    public loader: Loader;
 
     switch: string = 'login';
     user: User = new User();
