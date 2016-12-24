@@ -1,4 +1,5 @@
 import { CityList } from '../components/place-list-item/city-list';
+import { Loader } from '../components/loader/loader';
 import { BlankPage } from './blank-page/blank-page';
 import { ContactUs } from './contact-us/contact-us';
 import { BookingHistory } from './booking-history/booking-history';
@@ -46,7 +47,8 @@ export const APP_PAGES = [
     IonicModule.forRoot(PlaceListItem)
   ],
   declarations: [
-    APP_PAGES
+    APP_PAGES,
+    Loader
   ],
   exports: [
     APP_PAGES

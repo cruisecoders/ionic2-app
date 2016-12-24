@@ -1,15 +1,23 @@
+import { Loader } from '../../components/loader/loader';
+import { PlaceLuggageForm } from '../../components/place-details/place-luggage-form/place-luggage-form';
 import { PlaceConfirm } from '../place-confirm/place-confirm';
 import { LuggageService } from '../../providers/luggage-service';
 import { AuthService } from '../../providers/auth-service';
 import { User } from '../auth-form/user';
 import { APP_CONFIG, AppConfig } from '../../app/app-config';
-import { Component, Inject, OnInit } from '@angular/core';
-import { AlertController, LoadingController, NavController, NavParams, ViewController } from 'ionic-angular';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { NavController, NavParams, ViewController } from 'ionic-angular';
 
 @Component({
   templateUrl: 'place-detail.html'
 })
 export class PlaceDetail implements OnInit {
+
+  @ViewChild(PlaceLuggageForm)
+  private placeLuggageForm: PlaceLuggageForm;
+
+  @ViewChild(Loader)
+  private loader: Loader;
 
   public place: any = {};
   public imgPath: string;
@@ -19,7 +27,6 @@ export class PlaceDetail implements OnInit {
   public roomLeftMsg: string;
   public booking: {};
   public errorMessage: any;
-  public loading: any;
 
   constructor(
     private navParams: NavParams,
@@ -27,23 +34,25 @@ export class PlaceDetail implements OnInit {
     @Inject(APP_CONFIG) private config: AppConfig,
     private authService: AuthService,
     private luggageService: LuggageService,
-    public loadingCtrl: LoadingController,
-    private alertController: AlertController,
     private viewCtrl: ViewController
   ) { this.imgPath = config.apiImgEndPoint; }
 
   ngOnInit() {
     this.place = this.navParams.data.place;
+    this.changeLabelMsgs();
+    this.loadUserProfile();
+  }
+
+  changeLabelMsgs(): void {
     if (this.navParams.data.config == this.config.FRESHENUP) {
       this.dateLabel = "Check-in Date";
       this.guestMsg = "Guest to take freshen up";
-      this.roomLeftMsg = "Only " + this.place.reservedRooms + " rooms left";
+      this.roomLeftMsg = "Only " + this.place.rooms[0].reservedRooms + " rooms left";
     } else if (this.navParams.data.config == this.config.LUGGAGE) {
       this.dateLabel = "Luggage Booking Date";
       this.guestMsg = "Keep your luggage safely";
-      this.roomLeftMsg = "Only " + this.place.reservedRooms + " places left";
+      this.roomLeftMsg = "Only " + this.place.rooms[0].reservedRooms + " places left";
     }
-    this.loadUserProfile();
   }
 
   loadUserProfile(): void {
@@ -54,8 +63,25 @@ export class PlaceDetail implements OnInit {
     return this.place.id;
   }
 
+  dateChangedEvent(event): void {
+     this.loader.showLoader();
+    this.luggageService.getPlaceByIdAndOnDate(this.place.id, event.onDate).subscribe(
+      data => {
+        this.place = data;
+        this.changeLabelMsgs();
+        this.placeLuggageForm.notifyChild();
+         this.loader.dismissLoader();
+      },
+      error => {
+        this.errorMessage = <any>error;
+         this.loader.errorHandler(this.errorMessage);        
+         this.loader.dismissLoader();
+      }
+    )
+  }
+
   confirmBooking(event): void {
-    this.showLoader();
+     this.loader.showLoader();
 
     let guestName: string = this.user.firstName;
     let guestNumber: number = this.user.number;
@@ -89,42 +115,14 @@ export class PlaceDetail implements OnInit {
           // then we remove it from the navigation stack
           this.navCtrl.remove(index);
         });
-        this.dismissLoader();
+         this.loader.dismissLoader();
       },
       error => {
         this.errorMessage = <any>error;
-        this.errorHandler();
-        this.dismissLoader();
+         this.loader.errorHandler(this.errorMessage);
+         this.loader.dismissLoader();
       }
     );
-  }
-
-  private errorHandler() {
-    if (this.errorMessage.data != undefined) {
-      this.showAlert("Ooops", this.errorMessage.data);
-    } else {
-      this.showAlert("Ooops", "Please check your internet connection");
-    }
-  }
-
-  showAlert(title: string, subtitle: string): void {
-    let alert = this.alertController.create({
-      title: title,
-      subTitle: subtitle,
-      buttons: ['OK']
-    });
-    alert.present();
-  }
-
-  private showLoader() {
-    this.loading = this.loadingCtrl.create({
-      content: 'Please wait...'
-    });
-    this.loading.present();
-  }
-
-  private dismissLoader() {
-    this.loading.dismiss();
   }
 
 }

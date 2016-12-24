@@ -1,8 +1,9 @@
+import { Loader } from '../../components/loader/loader';
 import { AuthOTP } from './auth-otp';
-import { AlertController, LoadingController, NavController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { User } from './user';
 import { AuthService } from '../../providers/auth-service';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import 'rxjs/add/operator/catch';
 
 
@@ -13,46 +14,47 @@ import 'rxjs/add/operator/catch';
 
 export class AuthForm {
 
+    @ViewChild(Loader)
+    private loader: Loader;
+
     switch: string = 'login';
     user: User = new User();
     errorMessage: any;
-    public loading: any;
 
     constructor(private authService: AuthService,
         private navCtrl: NavController,
-        public loadingCtrl: LoadingController,
-        private alertController: AlertController) { }
+        ) { }
 
     login(user: User): void {
-        this.showLoader();
+        this.loader.showLoader();
         this.authService.login(user)
             .subscribe(
             user => {
-                this.dismissLoader();
+                this.loader.dismissLoader();
                 if (user.numberExist) {
                     this.goToOTP(user);
                 } else {
-                    this.showAlert("Ooops", "Number is not registered. Please Signup");
+                    this.loader.showAlert("Ooops", "Number is not registered. Please Signup");
                     this.switch = "signup";
                 }
             },
             error => {
                 this.errorMessage = <any>error;
-                this.errorHandler();
-                this.dismissLoader();
+                this.loader.errorHandler(this.errorMessage);
+                this.loader.dismissLoader();
             }
 
             );
     }
 
     signup(user: User): void {
-        this.showLoader();
+        this.loader.showLoader();
         this.authService.signup(user)
             .subscribe(
             user => {
-                this.dismissLoader();
+                this.loader.dismissLoader();
                 if (user.numberExist) {
-                    this.showAlert("Ooops", "Number is already registered. Please Login");
+                    this.loader.showAlert("Ooops", "Number is already registered. Please Login");
                     this.switch = "login";
                 } else {
                     this.goToOTP(this.user);
@@ -60,43 +62,15 @@ export class AuthForm {
             },
             error => {
                 this.errorMessage = <any>error;
-                this.errorHandler();
-                this.dismissLoader();
+                this.loader.errorHandler(this.errorMessage);
+                this.loader.dismissLoader();
             });
-    }
-
-    showAlert(title: string, subtitle: string): void {
-        let alert = this.alertController.create({
-            title: title,
-            subTitle: subtitle,
-            buttons: ['OK']
-        });
-        alert.present();
     }
 
     goToOTP(user: User): void {
         this.navCtrl.push(AuthOTP, {
             user: user
         });
-    }
-
-    private errorHandler() {
-        if (this.errorMessage.data != undefined) {
-            this.showAlert("Ooops", this.errorMessage.data);
-        } else {
-            this.showAlert("Ooops", "Please check your internet connection" );
-        }
-    }
-
-    private showLoader() {
-        this.loading = this.loadingCtrl.create({
-            content: 'Please wait...'
-        });
-        this.loading.present();
-    }
-
-    private dismissLoader() {
-        this.loading.dismiss();
     }
 
 }

@@ -14,6 +14,7 @@ export class PlaceLuggageForm implements OnInit {
   @Input() guestMsg: string;
   @Input() roomLeftMsg: string;
   @Output() clicked: EventEmitter<any> = new EventEmitter();
+  @Output() dateChangedEvent: EventEmitter<any> = new EventEmitter();
 
   currentDate: Date = new Date();
   startDate: String = this.currentDate.toISOString();
@@ -27,8 +28,14 @@ export class PlaceLuggageForm implements OnInit {
   }
 
   ngOnInit() {
-    this.selectedRate = this.place.rates[0];
+    this.selectedRate = this.place.rooms[0].rates[0];
     this.displayName = this.user.firstName;
+  }
+
+  public notifyChild() {
+    setTimeout(() => {
+      this.selectedRate = this.place.rooms[0].rates[0];
+    }, 300);
   }
 
   getDate(): String {
@@ -47,6 +54,15 @@ export class PlaceLuggageForm implements OnInit {
 
   confirmBooking() {
     this.clicked.emit({ rate: this.selectedRate, date: this.selDate, updatedUser: this.updatedUser });
+  }
+
+  dateChanged(selDate: any) {
+    if (selDate == this.startDate) {
+      console.log("same");
+    } else {
+      console.log("diff");
+      this.dateChangedEvent.emit({ onDate: selDate });
+    }
   }
 
   showUserDetail(): void {
@@ -88,7 +104,7 @@ export class PlaceLuggageForm implements OnInit {
               return false;
             }
 
-            if(data.number.toString().length != 10){
+            if (data.number.toString().length != 10) {
               console.log('number length should be 10');
               return false;
             }

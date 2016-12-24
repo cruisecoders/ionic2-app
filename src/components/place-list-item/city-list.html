@@ -7,6 +7,7 @@
     </ion-navbar>
 </ion-header>
 <ion-content class="city-list">
+    <loader></loader>
     <ion-searchbar [(ngModel)]="autocomplete.name" [showCancelButton]="true" (ionInput)="updateSearch()" (ionCancel)="dismiss()"
         placeholder="Please Enter City (eg:Shirdi)"></ion-searchbar>
     <ion-list [hidden]="!showList" class="autocomplete-list">

@@ -1,11 +1,12 @@
 <ion-header [ngClass]="{'transparent-header': placeList.length != 0}">
     <ion-navbar>
       <ion-title *ngIf="placeList.length == 0" >
-        <strong>Places not found</strong>
+        <strong>Places</strong>
       </ion-title>
     </ion-navbar>
 </ion-header>
 <ion-content class="place-list full-content" fullscreen="true">
+  <loader></loader>
   <div *ngFor="let place of placeList" (click)="goToPlaceDetail(place)">
     <img class="f-image" src="{{imgPath}}{{place.frontImg}}" />
 
@@ -13,7 +14,7 @@
       <ion-row>
         <ion-col width-75 text-left>{{place.name}}</ion-col>
         <ion-col width-25 text-left>
-          <button class="rate-button" ion-button color="secondary" small>{{place.startingRate | currency:'INR':true:'1.0-0'}}</button>
+          <button class="rate-button" ion-button color="secondary" small>{{place.rooms[0].startingRate | currency:'INR':true:'1.0-0'}}</button>
         </ion-col>
       </ion-row>
     </ion-item>

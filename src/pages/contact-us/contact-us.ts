@@ -1,6 +1,7 @@
+import { Loader } from '../../components/loader/loader';
 import { LuggageService } from '../../providers/luggage-service';
-import { Component, OnInit } from '@angular/core';
-import { AlertController, LoadingController, NavController, NavParams } from 'ionic-angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
 
 @Component({
   selector: 'contact-us',
@@ -9,18 +10,18 @@ import { AlertController, LoadingController, NavController, NavParams } from 'io
 
 export class ContactUs implements OnInit {
 
+  @ViewChild(Loader)
+  private loader: Loader;
+
   public showList: boolean = true;
   public title: string;
   errorMessage: any;
-  public loading: any;
   public ContactList: any[] = [];
 
   constructor(
     private navParams: NavParams,
     private navCtrl: NavController,
-    private luggageService: LuggageService,
-    public loadingCtrl: LoadingController,
-    private alertController: AlertController,
+    private luggageService: LuggageService
   ) {
   }
 
@@ -30,45 +31,17 @@ export class ContactUs implements OnInit {
   }
 
   getContactUs(): void {
-    this.showLoader();
+    this.loader.showLoader();
     this.luggageService.getContactUs().subscribe(
       data => {
         this.ContactList = data;
-        this.dismissLoader();
+        this.loader.dismissLoader();
       },
       error => {
         this.errorMessage = <any>error;
-        this.errorHandler();
-        this.dismissLoader();
+        this.loader.errorHandler(this.errorMessage);
+        this.loader.dismissLoader();
       }
     )
-  }
-
-  private errorHandler() {
-    if (this.errorMessage.data != undefined) {
-      this.showAlert("Ooops", this.errorMessage.data);
-    } else {
-      this.showAlert("Ooops", "Please check your internet connection");
-    }
-  }
-
-  showAlert(title: string, subtitle: string): void {
-    let alert = this.alertController.create({
-      title: title,
-      subTitle: subtitle,
-      buttons: ['OK']
-    });
-    alert.present();
-  }
-
-  private showLoader() {
-    this.loading = this.loadingCtrl.create({
-      content: 'Please wait...'
-    });
-    this.loading.present();
-  }
-
-  private dismissLoader() {
-    this.loading.dismiss();
   }
 }

@@ -1,8 +1,9 @@
+import { Loader } from '../../components/loader/loader';
 import { APP_CONFIG, AppConfig } from '../../app/app-config';
 import { User } from './user';
 import { AuthService } from '../../providers/auth-service';
-import { Component, Inject, OnInit } from '@angular/core';
-import { AlertController, LoadingController, NavController, NavParams } from 'ionic-angular';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
 import { PlaceBooking } from '../place-booking/place-booking';
 
 @Component({
@@ -12,19 +13,19 @@ import { PlaceBooking } from '../place-booking/place-booking';
 
 export class AuthOTP implements OnInit {
 
+    @ViewChild(Loader)
+    private loader: Loader;
+
     user: User;
     errorMessage: any;
-    public loading: any;
 
     constructor(private authService: AuthService,
         private navParams: NavParams,
         private navCtrl: NavController,
-        public loadingCtrl: LoadingController,
-        @Inject(APP_CONFIG) private config: AppConfig,
-        private alertController: AlertController) { }
+        @Inject(APP_CONFIG) private config: AppConfig) { }
 
     submitOTP(user: User): void {
-        this.showLoader();
+        this.loader.showLoader();
         this.authService.submitOTP(user)
             .subscribe(
             data => {
@@ -34,59 +35,31 @@ export class AuthOTP implements OnInit {
                     //config: this.config.FRESHENUP,
                     title: 'Home'
                 });
-                this.dismissLoader();
+                this.loader.dismissLoader();
             },
             error => {
                 this.errorMessage = <any>error;
-                this.errorHandler();
-                this.dismissLoader();
+                this.loader.errorHandler(this.errorMessage);
+                this.loader.dismissLoader();
             });
     }
 
     regenerateOTP(user: User): void {
-        this.showLoader();
+        this.loader.showLoader();
         this.authService.regenerateOTP(user)
             .subscribe(
             data => {
-                this.dismissLoader();
+                this.loader.dismissLoader();
             },
             error => {
                 this.errorMessage = <any>error;
-                this.errorHandler();
-                this.dismissLoader();
+                this.loader.errorHandler(this.errorMessage);
+                this.loader.dismissLoader();
             });
     }
 
     ngOnInit() {
         this.user = this.navParams.data.user;
-    }
-
-    showAlert(title: string, subtitle: string): void {
-        let alert = this.alertController.create({
-            title: title,
-            subTitle: subtitle,
-            buttons: ['OK']
-        });
-        alert.present();
-    }
-
-    private errorHandler() {
-        if (this.errorMessage.data != undefined) {
-            this.showAlert("Ooops", this.errorMessage.data);
-        } else {
-            this.showAlert("Ooops", "Please check your internet connection");
-        }
-    }
-
-    private showLoader() {
-        this.loading = this.loadingCtrl.create({
-            content: 'Please wait...'
-        });
-        this.loading.present();
-    }
-
-    private dismissLoader() {
-        this.loading.dismiss();
     }
 
 }

@@ -7,6 +7,7 @@
 </ion-header>
 
 <ion-content class="place-detail full-content" fullscreen="true">
+  <loader></loader>
   <div *ngIf="place">
 
     <div>
@@ -20,7 +21,8 @@
     <place-detail-facilities *ngIf="place.facilities.length > 0" [place]="place"></place-detail-facilities>
 
     <place-luggage-form [place]="place" [dateLabel]="dateLabel" [user]="user" [guestMsg]="guestMsg" [roomLeftMsg]="roomLeftMsg"
-      (clicked)="confirmBooking($event)">
+      (clicked)="confirmBooking($event)"
+      (dateChangedEvent)="dateChangedEvent($event)">
     </place-luggage-form>
 
   </div>

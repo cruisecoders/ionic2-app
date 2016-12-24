@@ -12,7 +12,7 @@ export class LuggageService {
     constructor(private coreService: CoreService) {
     }
 
-    private getURLSearchParams(key: string, value: string): URLSearchParams {
+    private getURLSearchParams(key: string, value: any): URLSearchParams {
         let params = new URLSearchParams();
         params.set(key, value);
         return params;
@@ -59,4 +59,12 @@ export class LuggageService {
         params.set("placeType", placeType);
         return this.coreService.getSecuredResource('getPlacesByCityIdAndType', params);
     }
+
+    public getPlaceByIdAndOnDate(id: number, onDate: any): Observable<any> {
+        let params = this.getURLSearchParams("id", id);
+        params.set("onDate", onDate);
+        return this.coreService.getSecuredResource('getPlaceByIdAndOnDate', params);
+    }
+
+    
 }
