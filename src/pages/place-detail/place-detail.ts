@@ -64,24 +64,33 @@ export class PlaceDetail implements OnInit {
   }
 
   dateChangedEvent(event): void {
-     this.loader.showLoader();
+    this.loader.showLoader();
     this.luggageService.getPlaceByIdAndOnDate(this.place.id, event.onDate).subscribe(
       data => {
-        this.place = data;
-        this.changeLabelMsgs();
-        this.placeLuggageForm.notifyChild();
-         this.loader.dismissLoader();
+        console.log("success");
+        console.log(data);
+        if (data == null || data == undefined || Object.keys(data).length === 0) {
+          this.loader.manualErrorHandler("Hotel is not available on "+event.onDate.slice(0, 10));
+          this.placeLuggageForm.notifyChild(false);
+          this.loader.dismissLoader();
+        } else {
+          this.place = data;
+          this.changeLabelMsgs();
+          this.placeLuggageForm.notifyChild(true);
+          this.loader.dismissLoader();
+        }
+
       },
       error => {
         this.errorMessage = <any>error;
-         this.loader.errorHandler(this.errorMessage);        
-         this.loader.dismissLoader();
+        this.loader.errorHandler(this.errorMessage);
+        this.loader.dismissLoader();
       }
     )
   }
 
   confirmBooking(event): void {
-     this.loader.showLoader();
+    this.loader.showLoader();
 
     let guestName: string = this.user.firstName;
     let guestNumber: number = this.user.number;
@@ -115,12 +124,12 @@ export class PlaceDetail implements OnInit {
           // then we remove it from the navigation stack
           this.navCtrl.remove(index);
         });
-         this.loader.dismissLoader();
+        this.loader.dismissLoader();
       },
       error => {
         this.errorMessage = <any>error;
-         this.loader.errorHandler(this.errorMessage);
-         this.loader.dismissLoader();
+        this.loader.errorHandler(this.errorMessage);
+        this.loader.dismissLoader();
       }
     );
   }

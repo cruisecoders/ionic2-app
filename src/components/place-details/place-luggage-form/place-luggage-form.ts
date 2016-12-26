@@ -9,7 +9,7 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 export class PlaceLuggageForm implements OnInit {
 
   @Input() place: any;
-  @Input() dateLabel: String;
+  @Input() dateLabel: string;
   @Input() user: User;
   @Input() guestMsg: string;
   @Input() roomLeftMsg: string;
@@ -17,10 +17,10 @@ export class PlaceLuggageForm implements OnInit {
   @Output() dateChangedEvent: EventEmitter<any> = new EventEmitter();
 
   currentDate: Date = new Date();
-  startDate: String = this.currentDate.toISOString();
-  selDate: String = this.currentDate.toISOString();
+  startDate: string = this.currentDate.toISOString();
+  selDate: string = this.currentDate.toISOString();
   lastDate: String;
-  endDate: String = this.getDate();
+  endDate: string = this.getDate();
   selectedRate: any = new Object();
   updatedUser: { name: string, number: number } = { name: '', number: 0 };
   displayName: string;
@@ -33,13 +33,17 @@ export class PlaceLuggageForm implements OnInit {
     this.displayName = this.user.firstName;
   }
 
-  public notifyChild() {
-    setTimeout(() => {
-      this.selectedRate = this.place.rooms[0].rates[0];
-    }, 300);
+  public notifyChild(isAvailable: boolean) {
+    if (isAvailable) {
+      setTimeout(() => {
+        this.selectedRate = this.place.rooms[0].rates[0];
+      }, 300);
+    } else {
+      this.selDate = this.startDate;
+    }
   }
 
-  getDate(): String {
+  getDate(): string {
     let d = new Date();
     d.setMonth(d.getMonth() + 3);
     return d.toISOString();
@@ -65,10 +69,10 @@ export class PlaceLuggageForm implements OnInit {
     }
 
     if (selDate == this.startDate) {
-      
-      if(this.lastDate){
+
+      if (this.lastDate) {
         this.dateChangedEvent.emit({ onDate: selDate });
-      }else{
+      } else {
         console.log("same starting date")
         return;
       }

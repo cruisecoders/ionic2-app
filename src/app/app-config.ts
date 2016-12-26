@@ -16,10 +16,10 @@ export interface AppConfig {
 }
 
 export const API_CONFIG: AppConfig = {
-    apiEndpoint: 'http://bag2bag.in/api/',
+    apiEndpoint: 'http://localhost:8080/api/',
     LUGGAGE: "LUGGAGE",
     FRESHENUP: "FRESHENUP",
-    apiImgEndPoint: 'http://bag2bag.in/images/',
+    apiImgEndPoint: 'http://localhost:8080/images/',
     COD: "COD",
     Paytm: "Paytm",
     Pending: "Pending",

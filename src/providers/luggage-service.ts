@@ -34,7 +34,7 @@ export class LuggageService {
     }
 
     public cancelBooking(booking: any): Observable<any> {
-        return this.coreService.postSecuredResource('cancelBooking/' + booking.id, {});
+        return this.coreService.postSecuredResource('cancelBooking', booking);
     }
 
     public getCities(): Observable<any> {
@@ -66,5 +66,5 @@ export class LuggageService {
         return this.coreService.getSecuredResource('getPlaceByIdAndOnDate', params);
     }
 
-    
+
 }

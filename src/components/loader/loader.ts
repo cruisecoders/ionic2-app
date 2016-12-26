@@ -2,19 +2,23 @@ import { AlertController, LoadingController } from 'ionic-angular';
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'loader',
-  templateUrl: 'loader.html'
+    selector: 'loader',
+    templateUrl: 'loader.html'
 })
 export class Loader {
 
-  public loading: any;
+    public loading: any;
 
-  constructor(
-    public alertController: AlertController,
-    public loadingCtrl: LoadingController
-  ){}
+    constructor(
+        public alertController: AlertController,
+        public loadingCtrl: LoadingController
+    ) { }
 
-  public errorHandler(errorMessage) {
+    public manualErrorHandler(errorMessage) {
+        this.showAlert("Ooops", errorMessage);
+    }
+
+    public errorHandler(errorMessage) {
         if (errorMessage.data != undefined) {
             this.showAlert("Ooops", errorMessage.data);
         } else {
@@ -32,7 +36,7 @@ export class Loader {
     }
 
     public showLoader() {
-      console.log("show loader");
+        console.log("show loader");
         this.loading = this.loadingCtrl.create({
             content: 'Please wait...'
         });
